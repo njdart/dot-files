@@ -45,6 +45,8 @@ PROMPT="[%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m(%l)%{$reset_color%}] %{$
 RPROMPT="[%{$fg_no_bold[yellow]%}%?%{$reset_color%}] [%{$fg[magenta]%}%T %D%{$reset_color%}]"
 
 alias ls='ls -sh1 --color'
-alias hal='ls -hal'
+alias hal='ls -halp'
 alias grep='grep --color'
 alias egrep='grep -E -o --color'
+alias pingg="ping www.google.co.uk"
+#alias mtrdump="URL=\"$(cat)\" && echo \"MTR TO: $URL\"; echo \"$URL\" >> ~/mtr; mtr $URL -c 10 --report &>> ~/mtr"
