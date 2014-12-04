@@ -16,11 +16,11 @@ case $1 in
     exec $1 # &>> $WM_err
     ;;
   bspwm)
-    #sxhkd &>> /home/nic/.sxhkd_err &
-    #exec bspwm &>> $WM_err
+    sxhkd & &> WM_err
+    exec bspwm &> WM_err
     ;;
   *)
-    #exec $1 &>> $WM_err ## ||
-    #  echo "Unknown WM, add to .xinitrc" >> $WM_err
+    exec $1 &>> $WM_err ## ||
+    echo "Unknown WM, add to .xinitrc" >> $WM_err
     ;;
 esac

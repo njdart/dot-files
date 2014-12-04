@@ -49,4 +49,5 @@ alias hal='ls -halp'
 alias grep='grep --color'
 alias egrep='grep -E -o --color'
 alias pingg="ping www.google.co.uk"
+alias l="ls"
 #alias mtrdump="URL=\"$(cat)\" && echo \"MTR TO: $URL\"; echo \"$URL\" >> ~/mtr; mtr $URL -c 10 --report &>> ~/mtr"
