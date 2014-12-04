@@ -1,7 +1,7 @@
 #!/bin/bash
 # External sources
 if [ -e /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsH	# zsh syntax highlighting
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh	# zsh syntax highlighting
 											# install zsh-colour-highlighting
 else 
     source ./zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh

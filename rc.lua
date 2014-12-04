@@ -10,7 +10,7 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
---local vicious = require("vicious")
+local vicious = require("vicious")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -94,7 +94,8 @@ myawesomemenu = {
    { "manual", terminal .. " -e man awesome" },
    { "edit config", editor_cmd .. " " .. awesome.conffile },
    { "restart", awesome.restart },
-   { "quit", awesome.quit }
+   { "quit", awesome.quit },
+   { "halt", terminal .. " -e sudo poweroff" }
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
@@ -165,6 +166,20 @@ mytasklist.buttons = awful.util.table.join(
                                               awful.client.focus.byidx(-1)
                                               if client.focus then client.focus:raise() end
                                           end))
+
+
+-- {{{ My custom widgets
+
+mysystray = wibox.widget.systray()
+myicon = wibox.widget.imagebox()
+myicon:set_image(awful.util.getdir("config") .. "/myicon.png")
+mytextbox = wibox.widget.textbox()
+mytextbox:set_text("Hello, world!")
+
+
+-- }}}
+
+
 
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
