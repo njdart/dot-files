@@ -1,3 +1,12 @@
+#!/bin/bash
+# External sources
+if [ -e /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh	# zsh syntax highlighting
+											# install zsh-colour-highlighting
+else 
+    source ./zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+fi
+
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.history
 HISTSIZE=1000
@@ -50,4 +59,3 @@ alias grep='grep --color'
 alias egrep='grep -E -o --color'
 alias pingg="ping www.google.co.uk"
 alias l="ls"
-#alias mtrdump="URL=\"$(cat)\" && echo \"MTR TO: $URL\"; echo \"$URL\" >> ~/mtr; mtr $URL -c 10 --report &>> ~/mtr"
