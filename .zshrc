@@ -1,7 +1,7 @@
 #!/bin/bash
 # External sources
 if [ -e /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsH	# zsh syntax highlighting
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh	# zsh syntax highlighting
 											# install zsh-colour-highlighting
 else 
     source ./zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
@@ -59,3 +59,4 @@ alias grep='grep --color'
 alias egrep='grep -E -o --color'
 alias pingg="ping www.google.co.uk"
 alias spammers="sudo cat /var/log/fail2ban.log | egrep 'Ban.+' | awk '{print $2}' > /tmp/spammers; sort /tmp/spammers | uniq | xargs -I % curl -silent http://www.whois.com/whois/% | egrep 'country:\s*..' > ~/spammers"
+alias l="ls"
