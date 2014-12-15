@@ -19,6 +19,10 @@ case $1 in
     sxhkd & &> WM_err
     exec bspwm &> WM_err
     ;;
+  awesome)
+    xbindkeys
+    exec awesome
+    ;;
   *)
     exec $1 &>> $WM_err ## ||
     echo "Unknown WM, add to .xinitrc" >> $WM_err

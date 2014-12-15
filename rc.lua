@@ -5,12 +5,12 @@ awful.rules = require("awful.rules")
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
+local vicious = require("vicious")
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
-local vicious = require("vicious")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -290,7 +290,30 @@ globalkeys = awful.util.table.join(
                   awful.util.getdir("cache") .. "/history_eval")
               end),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end)
+    awful.key({ modkey }, "p", function() menubar.show() end),
+
+    -- Custom prompts
+   
+    -- Run as sudo
+    awful.key({ modkey, "Shift" }, "p",
+              function() 
+                  awful.prompt.run({ prompt = "Sudo: " },
+                  mypromptbox[mouse.screen].widget,
+                  function(data)
+                      awful.util.spawn(terminal .. " -e sudo " .. data)
+                  end)
+              end),
+    -- SSH
+    awful.key({ modkey }, "s", 
+              function()
+                  awful.prompt.run({ prompt = "SSH: " },
+                  mypromptbox[mouse.screen].widget,
+                  function(data)
+                      awful.util.spawn(terminal .. " -e ssh "
+                                       .. os.getenv("USER")
+                                       ..  "@" .. data)
+                  end)
+              end)
 )
 
 clientkeys = awful.util.table.join(
