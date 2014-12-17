@@ -11,6 +11,9 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
+require("myWidgets")
+
+
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -39,7 +42,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+beautiful.init("/home/" .. os.getenv("USER") .. "/.config/awesome/brilliant/brilliant.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
@@ -61,10 +64,10 @@ local layouts =
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
+    -- awful.layout.suit.fair,
+    -- awful.layout.suit.fair.horizontal,
+    -- awful.layout.suit.spiral,
+    -- awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier
@@ -168,16 +171,6 @@ mytasklist.buttons = awful.util.table.join(
                                           end))
 
 
--- {{{ My custom widgets
-
-mysystray = wibox.widget.systray()
-myicon = wibox.widget.imagebox()
-myicon:set_image(awful.util.getdir("config") .. "/myicon.png")
-mytextbox = wibox.widget.textbox()
-mytextbox:set_text("Hello, world!")
-
-
--- }}}
 
 
 
@@ -203,20 +196,22 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
-    left_layout:add(mylauncher)
+    -- left_layout:add(mylauncher)
     left_layout:add(mytaglist[s])
     left_layout:add(mypromptbox[s])
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-    if s == 1 then right_layout:add(wibox.widget.systray()) end
-    right_layout:add(mytextclock)
-    right_layout:add(mylayoutbox[s])
+    --if s == 1 then right_layout:add(wibox.widget.systray()) end
+    if s == 1 and widgets.memory or nil then right_layout:add(widgets.memory) end
+    --if s == 1 and cpuwidget or nil then right_layout:add(cpuwidget) end 
+    --right_layout:add(mytextclock)
+    --right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
     layout:set_left(left_layout)
-    layout:set_middle(mytasklist[s])
+    --layout:set_middle(mytasklist[s])
     layout:set_right(right_layout)
 
     mywibox[s]:set_widget(layout)
@@ -401,12 +396,11 @@ awful.rules.rules = {
                      raise = true,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-    { rule = { class = "MPlayer" },
-      properties = { floating = true } },
-    { rule = { class = "pinentry" },
-      properties = { floating = true } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
+    { rule= { class = "chrome" },
+      properties = { tag = tags[1][2],
+                     floating = false } }
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
@@ -414,7 +408,7 @@ awful.rules.rules = {
 -- }}}
 
 -- {{{ Signals
--- Signal function to execute when a new client appears.
+-- Signal function to uxecute when a new client appears.
 client.connect_signal("manage", function (c, startup)
     -- Enable sloppy focus
     c:connect_signal("mouse::enter", function(c)

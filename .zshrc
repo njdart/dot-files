@@ -1,12 +1,7 @@
 #!/bin/bash
 # External sources
-if [ -e /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh	# zsh syntax highlighting
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh	# zsh syntax highlighting
 											# install zsh-colour-highlighting
-else 
-    source ./zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
-fi
-
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.history
 HISTSIZE=1000
@@ -23,6 +18,8 @@ compinit
 # End of lines added by compinstall
 
 export PATH=$PATH:/home/nic/bin/
+#export TERM=/usr/bin/urxvt
+export EDITOR="/usr/bin/vim"
 
 # key bindings
 bindkey "\e[1~" beginning-of-line
