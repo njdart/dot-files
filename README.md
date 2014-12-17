@@ -1,4 +1,9 @@
-Dot Files
+#Dot Files
 =========
 
-I use Arch Linux (FTW) with DWM as my window manager of choice with conky to control the status bar. Occasionaly with xfce or gnome. 
+I use Awesome wm on Arch linux on both my desktop and laptops, here are some configurations for them :)
+
+##Busy:
+![Busy](http://github.com/njdart/dot-files/blob/master/busy.png)
+##Quiet:
+![Quiet](http://github.com/njdart/dot-files/blob/master/quiet.png)
