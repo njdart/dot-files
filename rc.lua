@@ -198,20 +198,27 @@ for s = 1, screen.count() do
     local left_layout = wibox.layout.fixed.horizontal()
     -- left_layout:add(mylauncher)
     left_layout:add(mytaglist[s])
-    left_layout:add(mypromptbox[s])
+    --left_layout:add(mypromptbox[s])
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-    --if s == 1 then right_layout:add(wibox.widget.systray()) end
-    if s == 1 and widgets.spacer or nil then right_layout:add(widgets.spacer) end
-    if s == 1 and widgets.mpdIcon or nil then right_layout:add(widgets.mpdIcon) end
-    if s == 1 and widgets.mpd or nil then right_layout:add(widgets.mpd) end
-    if s == 1 and widgets.spacer or nil then right_layout:add(widgets.spacer) end
-    if s == 1 and widgets.memIcon or nil then right_layout:add(widgets.memIcon) end 
-    if s == 1 and widgets.memory or nil then right_layout:add(widgets.memory) end
-    if s == 1 and widgets.spacer or nil then right_layout:add(widgets.spacer) end
-    if s == 1 and widgets.cpuIcon or nil then right_layout:add(widgets.cpuIcon) end
-    if s == 1 and widgets.cpu or nil then right_layout:add(widgets.cpu) end
+    if s == 1 then
+      right_layout:add(wibox.widget.systray())
+      for key,value in pairs(widgets) do
+        if value then
+          right_layout:add(value)
+        end
+      end
+    end
+--    if s == 1 and widgets.spacer or nil then right_layout:add(widgets.spacer) end
+--    if s == 1 and widgets.mpdIcon or nil then right_layout:add(widgets.mpdIcon) end
+--    if s == 1 and widgets.mpd or nil then right_layout:add(widgets.mpd) end
+--    if s == 1 and widgets.spacer or nil then right_layout:add(widgets.spacer) end
+--    if s == 1 and widgets.memIcon or nil then right_layout:add(widgets.memIcon) end 
+--    if s == 1 and widgets.memory or nil then right_layout:add(widgets.memory) end
+--    if s == 1 and widgets.spacer or nil then right_layout:add(widgets.spacer) end
+--    if s == 1 and widgets.cpuIcon or nil then right_layout:add(widgets.cpuIcon) end
+--    if s == 1 and widgets.cpu or nil then right_layout:add(widgets.cpu) end
     --right_layout:add(mytextclock)
     --right_layout:add(mylayoutbox[s])
 
