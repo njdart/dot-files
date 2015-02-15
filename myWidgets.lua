@@ -5,7 +5,6 @@ local wibox = require("wibox")
 
 -- Use a common width for all non-icon widgets
 local commonWidgetWidth = 50
-widgets = {}
 
 -- {{{ spacers and misc reusable widgets
 local spacer = wibox.widget.imagebox()
@@ -19,7 +18,7 @@ local clock = awful.widget.textclock()
 -- {{{ Memory Widgets
 local memory = awful.widget.graph()
 memory:set_width(commonWidgetWidth)
-memory:set_background_color("3D5266")
+memory:set_background_color(theme.bg_normal)
 memory:set_color(theme.widgets_fg_normal)
 vicious.register(memory, vicious.widgets.cpu, "$1")
 memIcon = wibox.widget.imagebox()
@@ -35,7 +34,6 @@ vicious.register(cpu, vicious.widgets.cpu, "$1")
 
 local cpuIcon = wibox.widget.imagebox()
 cpuIcon:set_image("/home/nic/.config/awesome/icons/cpu.png")
-
 -- }}}
 
 -- {{{ MPD and music widget
@@ -55,15 +53,24 @@ mpdIcon:set_image("/home/nic/.config/awesome/icons/music.png")
 
 -- insert at bottom will add items to left
 
-table.insert(widgets, spacer)
-table.insert(widgets, mpd)
-table.insert(widgets, spacer)
-table.insert(widgets, cpuIcon)
-table.insert(widgets, cpu)
-table.insert(widgets, spacer)
-table.insert(widgets, memIcon)
-table.insert(widgets, memory)
-table.insert(widgets, spacer)
-table.insert(widgets, clock)
+leftFloating = {}
+middleFloating = {}
+rightFloating = {}
 
+table.insert(rightFloating, spacer)
+table.insert(rightFloating, cpuIcon)
+table.insert(rightFloating, cpu)
+table.insert(rightFloating, spacer)
+table.insert(rightFloating, memIcon)
+table.insert(rightFloating, memory)
+table.insert(rightFloating, spacer)
+table.insert(rightFloating, clock)
+
+table.insert(middleFloating, mpd)
+
+widgets = {
+  leftWidgets = leftFloating,
+  middleWidgets = middleFloating,
+  rightWidgets = rightFloating
+}
 return widgets

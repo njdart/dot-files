@@ -11,9 +11,10 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
+local lain = require("lain")
 require("myWidgets")
 
-
+beautiful.useless_gaps_width = 10;
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -194,38 +195,36 @@ for s = 1, screen.count() do
     -- Create the wibox
     mywibox[s] = awful.wibox({ position = "top", screen = s })
 
-    -- Widgets that are aligned to the left
-    local left_layout = wibox.layout.fixed.horizontal()
+    local left_layout =   wibox.layout.fixed.horizontal()
+    local middle_layout = wibox.layout.fixed.horizontal()
+    local right_layout =  wibox.layout.fixed.horizontal()
+
+
     -- left_layout:add(mylauncher)
     left_layout:add(mytaglist[s])
     --left_layout:add(mypromptbox[s])
 
-    -- Widgets that are aligned to the right
-    local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then
       right_layout:add(wibox.widget.systray())
-      for key,value in pairs(widgets) do
+      for key,value in pairs(widgets.rightWidgets) do
         if value then
           right_layout:add(value)
         end
       end
+
+      for key,value in pairs(widgets.middleWidgets) do
+        if value then
+          middle_layout:add(value)
+        end
+      end
     end
---    if s == 1 and widgets.spacer or nil then right_layout:add(widgets.spacer) end
---    if s == 1 and widgets.mpdIcon or nil then right_layout:add(widgets.mpdIcon) end
---    if s == 1 and widgets.mpd or nil then right_layout:add(widgets.mpd) end
---    if s == 1 and widgets.spacer or nil then right_layout:add(widgets.spacer) end
---    if s == 1 and widgets.memIcon or nil then right_layout:add(widgets.memIcon) end 
---    if s == 1 and widgets.memory or nil then right_layout:add(widgets.memory) end
---    if s == 1 and widgets.spacer or nil then right_layout:add(widgets.spacer) end
---    if s == 1 and widgets.cpuIcon or nil then right_layout:add(widgets.cpuIcon) end
---    if s == 1 and widgets.cpu or nil then right_layout:add(widgets.cpu) end
-    --right_layout:add(mytextclock)
+    
     --right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
     layout:set_left(left_layout)
-    --layout:set_middle(mytasklist[s])
+    layout:set_middle(middle_layout)
     layout:set_right(right_layout)
 
     mywibox[s]:set_widget(layout)
@@ -342,7 +341,9 @@ clientkeys = awful.util.table.join(
         function (c)
             c.maximized_horizontal = not c.maximized_horizontal
             c.maximized_vertical   = not c.maximized_vertical
-        end)
+        end),
+    awful.key({ modkey, "Control" }, "+", function () lain.util.useless_gaps_resize(1) end),
+    awful.key({ modkey, "Control" }, "-", function () lain.util.useless_gaps_resize(-1) end)
 )
 
 -- Bind all key numbers to tags.
