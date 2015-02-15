@@ -48,7 +48,7 @@ bindkey "\e[F" end-of-line
 bindkey '^i' expand-or-complete-prefix
 
 PROMPT="[%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m(%l)%{$reset_color%}] %{$fg_no_bold[yellow]%}%~ %{$reset_color%}%# "
-RPROMPT="[%{$fg_no_bold[yellow]%}%?%{$reset_color%}] [%{$fg[magenta]%}%T %D%{$reset_color%}]"
+#RPROMPT="[%{$fg_no_bold[yellow]%}%?%{$reset_color%}] [%{$fg[magenta]%}%T %D%{$reset_color%}]"
 
 alias ls='ls -sh1 --color'
 alias hal='ls -halp'

@@ -1,0 +1,31 @@
+"asus-kbd-backlight down"
+    m:0x0 + c:237
+    XF86KbdBrightnessDown
+
+"asus-kbd-backlight up"
+    m:0x0 + c:238
+    XF86KbdBrightnessUp
+
+"scrot ~/screenshots/%Y-%m-%d-%T-screenshot.png"
+    m:0x0 + c:107
+    Print
+
+"mixer -D pulse set Master 1+ toggle"
+    m:0x0 + c:121
+    XF86AudioMute
+
+"amixer set Master 5%+"
+    m:0x0 + c:123
+    XF86AudioRaiseVolume
+
+"amixer set Master 5%-"
+    m:0x0 + c:122
+    XF86AudioLowerVolume
+
+"scrot ~/scrots/%Y-%m-%d_$wx$h.png"
+    m:0x1 + c:107
+    Shift + Print
+
+"(Scheme func"
+    m:0x0 + c:96
+    F12
