@@ -18,7 +18,7 @@ compinit
 # End of lines added by compinstall
 
 export PATH=$PATH:/home/nic/bin/
-#export TERM=/usr/bin/urxvt
+export TERM=xterm
 export EDITOR="/usr/bin/vim"
 
 # key bindings
@@ -38,7 +38,7 @@ bindkey "^H" backward-delete-word
 # for rxvt
 bindkey "\e[8~" end-of-line
 bindkey "\e[7~" beginning-of-line
-# for non RH/Debian xterm, can't hurt for RH/DEbian xterm
+# for non RH/mebian xterm, can't hurt for RH/DEbian xterm
 bindkey "\eOH" beginning-of-line
 bindkey "\eOF" end-of-line
 # for freebsd console
