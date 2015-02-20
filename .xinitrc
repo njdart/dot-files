@@ -1,30 +1,33 @@
 #!/bin/bash
 
-WM_err="/home/nic/.wmHistory"
+logFile="/home/$USER/.xinitrc.log"
 
-echo $@ >> $WM_err
+
+echo $@ >> $logFile
 
 case $1 in
   dwm)
     xbindkeys
-    /home/nic/bin/dwmBackgrounds & &>> $WM_err
+    /home/$USER/bin/backgrounds & &>> $logFile
     wmname LG3D
     conky | while read -r; do xsetroot -name "$REPLY"; done &
-    exec $1 &>> $WM_err
+    exec $1 &>> $logFile
     ;;
   startxfce4)
-    exec $1 # &>> $WM_err
+    exec startxfce4  &>> $logFile
     ;;
   bspwm)
-    sxhkd & &> WM_err
-    exec bspwm &> WM_err
+    sxhkd & &>> logFile
+    xbindkeys
+    /home/$USER/bin/backgrounds & &>> $logFile
+    exec bspwm &>> logFile
     ;;
   awesome)
     xbindkeys
     exec awesome
     ;;
   *)
-    exec $1 &>> $WM_err ## ||
-    echo "Unknown WM, add to .xinitrc" >> $WM_err
+    exec $1 &>> $logFile ## ||
+    echo "Unknown WM, add to .xinitrc" >> $logFile
     ;;
 esac
