@@ -17,6 +17,7 @@ case $1 in
     exec startxfce4  &>> $logFile
     ;;
   bspwm)
+    wmname LG3D
     sxhkd & &>> logFile
     xbindkeys
     /home/$USER/bin/backgrounds & &>> $logFile
