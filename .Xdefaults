@@ -22,9 +22,9 @@
 ! fonts
 ! run "fc-list" for a list of available fonts
 
-!URxvt*font: xft:Terminus:pixelsize=9
-URxvt*font: xft:Oxygen Mono:pixelsize=12
-
+URxvt*font: xft:Terminus:pixelsize=12
+!URxvt*font: xft:Oxygen Mono:pixelsize=9
+!URxvt*font: xft:Anonymous Pro:size=12
 
 urxvt*transparent: true
 urxvt*shading: 30
