@@ -2,7 +2,7 @@
 
 logFile="/home/$USER/.xinitrc.log"
 
-
+date >> $logFile
 echo $@ >> $logFile
 
 case $1 in
@@ -18,6 +18,7 @@ case $1 in
     ;;
   bspwm)
     sxhkd & &>> logFile
+    urxvt &
     xbindkeys
     /home/$USER/bin/backgrounds & &>> $logFile
     exec bspwm &>> logFile
@@ -28,7 +29,7 @@ case $1 in
     exec awesome
     ;;
   *)
-    exec $1 &>> $logFile ## ||
+    exec $1 &>> $logFile
     echo "Unknown WM, add to .xinitrc" >> $logFile
     ;;
 esac
