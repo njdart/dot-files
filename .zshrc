@@ -2,6 +2,8 @@
 # External sources
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh	# zsh syntax highlighting
 											# install zsh-colour-highlighting
+
+source /usr/share/doc/pkgfile/command-not-found.zsh					# sudo pacman -S pkgfile
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.history
 HISTSIZE=1000
@@ -57,3 +59,4 @@ alias egrep='grep -E -o --color'
 alias pingg="ping www.google.co.uk"
 alias spammers="sudo cat /var/log/fail2ban.log | egrep 'Ban.+' | awk '{print $2}' > /tmp/spammers; sort /tmp/spammers | uniq | xargs -I % curl -silent http://www.whois.com/whois/% | egrep 'country:\s*..' > ~/spammers"
 alias l="ls"
+alias lock='xscreensaver-command --lock'

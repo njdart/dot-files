@@ -21,8 +21,9 @@ case $1 in
     urxvt &
     xbindkeys
     /home/$USER/bin/backgrounds & &>> $logFile
-    exec bspwm &>> logFile
     wmname LG3D
+    /usr/bin/xscreensaver -no-splash & #Screen savers!
+    exec bspwm &>> logFile
     ;;
   awesome)
     xbindkeys
