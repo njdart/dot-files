@@ -204,7 +204,7 @@ for s = 1, screen.count() do
     left_layout:add(mytaglist[s])
     --left_layout:add(mypromptbox[s])
 
-    if s == 1 then
+    if s == 2 then
       right_layout:add(wibox.widget.systray())
       for key,value in pairs(widgets.rightWidgets) do
         if value then
