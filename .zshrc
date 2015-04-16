@@ -22,6 +22,7 @@ compinit
 export PATH=$PATH:/home/nic/bin/
 export TERM=xterm
 export EDITOR="/usr/bin/vim"
+export BROWSER="/usr/bin/google-chrome-stable"
 
 # key bindings
 bindkey "\e[1~" beginning-of-line

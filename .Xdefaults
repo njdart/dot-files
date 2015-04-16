@@ -48,6 +48,7 @@ urxvt*urlLauncher:     /usr/bin/chrome
 urxvt*matcher.button:  1
 !  - catch ugly URLs
 urxvt.cutchars:        `()'*<>[]{|}"
+URxvt.url-launcher:      /usr/bin/google-chrome-stable
 !URxvt.perl-ext-common : tabbed
 !URxvt.tabbed.tabbar-fg: 5
 !URxvt.tabbed.tabbar-bg: 0
