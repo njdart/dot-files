@@ -3,6 +3,8 @@ theme = {}
 -- Get the base dir
 local baseDir = "/home/" .. os.getenv("USER") .. "/.config/awesome/brilliant/"
 
+theme.wallpaper = baseDir .. "background.jpg"
+
 theme.font          = "sans 8"
 
 theme.bg_normal     = "#2e2e2e"--"#222222"
@@ -72,8 +74,6 @@ theme.menu_width  = 100
 --theme.titlebar_maximized_button_focus_inactive  = baseDir .. "titlebar/maximized_focus_inactive.png"
 --theme.titlebar_maximized_button_normal_active = baseDir .. "titlebar/maximized_normal_active.png"
 --theme.titlebar_maximized_button_focus_active  = baseDir .. "titlebar/maximized_focus_active.png"
-
-theme.wallpaper = "/home/nic/Dropbox/Backgrounds/ZVB9T40.jpg"
 
 -- You can use your own layout icons like this:
 --theme.layout_fairh = baseDir .. "layouts/fairhw.png"
