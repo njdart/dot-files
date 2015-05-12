@@ -61,3 +61,4 @@ alias pingg="ping www.google.co.uk"
 alias spammers="sudo cat /var/log/fail2ban.log | egrep 'Ban.+' | awk '{print $2}' > /tmp/spammers; sort /tmp/spammers | uniq | xargs -I % curl -silent http://www.whois.com/whois/% | egrep 'country:\s*..' > ~/spammers"
 alias l="ls"
 alias lock='xscreensaver-command --lock'
+alias scrot='scrot ~/screenshots/%Y-%m-%d-%T-screenshot.png'

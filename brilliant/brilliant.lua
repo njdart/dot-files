@@ -3,7 +3,7 @@ theme = {}
 -- Get the base dir
 local baseDir = "/home/" .. os.getenv("USER") .. "/.config/awesome/brilliant/"
 
-theme.wallpaper = baseDir .. "background.jpg"
+theme.wallpaper = baseDir .. "background.png"
 
 theme.font          = "sans 8"
 
