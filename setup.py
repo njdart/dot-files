@@ -20,7 +20,7 @@ if os.geteuid() == 0:
 #
 # entries are described as:
 # 
-#  (usesUserHome, destinationDirectory, [sources])
+#  (destinationDirectory, [sources])
 # where usesUserHome is boolean True/False
 # and destination is a directory
 configFiles = [
@@ -45,7 +45,9 @@ configFiles = [
     ".vimrc",
     ".xbindkeysrc",
     ".Xdefaults",
-    ".Xdefaults.old",
+    ".Xresources",
+    ".xprofile",
+    ".xscreensaver",
     ".xinitrc",
     ".zshrc"
   ]),

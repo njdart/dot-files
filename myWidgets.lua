@@ -57,13 +57,6 @@ leftFloating = {}
 middleFloating = {}
 rightFloating = {}
 
-table.insert(rightFloating, spacer)
-table.insert(rightFloating, cpuIcon)
-table.insert(rightFloating, cpu)
-table.insert(rightFloating, spacer)
-table.insert(rightFloating, memIcon)
-table.insert(rightFloating, memory)
-table.insert(rightFloating, spacer)
 table.insert(rightFloating, clock)
 
 table.insert(middleFloating, mpd)
