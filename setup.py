@@ -39,7 +39,7 @@ configFiles = [
   ]),
   ("$HOME/.config/sxhkd/", ["sxhkdrc"]),
   ("$HOME/.config/bspwm/", ["bspwmrc"]),
-  ("$HOME/.ncmpcpp", [".ncmpcpp"]),
+  ("$HOME/.ncmpcpp/", ["ncmpcpp"]),
   ("$HOME/", [
     ".muttrc",
     ".vimrc",
