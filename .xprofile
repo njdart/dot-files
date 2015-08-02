@@ -1,3 +1,15 @@
 #!/bin/bash
 
+logFile="/home/$USER/.xprofile.log"
+date >> $logFile
+echo $@ >> $logFile
+
+case $1 in
+  bspwm)
+     sxhkd & &>> logFile
+     urxvt &
+     wmname LG3D
+     ;;
+esac
+
 /usr/bin/xscreensaver -no-splash & #Screen savers!

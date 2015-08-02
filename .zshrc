@@ -23,6 +23,8 @@ export PATH=$PATH:/home/nic/bin/
 export TERM=xterm
 export EDITOR="/usr/bin/vim"
 export BROWSER="/usr/bin/google-chrome-stable"
+#export JAVA_HOME="/usr/lib/jvm/java-7-openjdk/bin/java"
+#export IDEA_JDK=$JAVA_HOME
 
 # key bindings
 bindkey "\e[1~" beginning-of-line

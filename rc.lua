@@ -169,10 +169,6 @@ mytasklist.buttons = awful.util.table.join(
     if client.focus then client.focus:raise() end
   end))
 
-
-
-
-
 for s = 1, screen.count() do
   -- Create a promptbox for each screen
   mypromptbox[s] = awful.widget.prompt()
@@ -197,13 +193,11 @@ for s = 1, screen.count() do
   local middle_layout = wibox.layout.fixed.horizontal()
   local right_layout =  wibox.layout.fixed.horizontal()
 
-
   -- left_layout:add(mylauncher)
   left_layout:add(mytaglist[s])
   --left_layout:add(mypromptbox[s])
 
   if s == 2 then
-    right_layout:add(wibox.widget.systray())
     for key,value in pairs(widgets.rightWidgets) do
     if value then
       right_layout:add(value)
