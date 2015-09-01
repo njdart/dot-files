@@ -51,6 +51,7 @@ configFiles = [
     ".xinitrc",
     ".zshrc"
   ]),
+  ("$HOME/.confg/sublime-text-3/Packages/User/", ["Default (Linux).sublime-keymap"]),
   ("$HOME/screenshots/", []), # this is only to satisfy the scrot alias in .zshrc
 ]
 
