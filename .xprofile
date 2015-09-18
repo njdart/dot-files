@@ -1,6 +1,9 @@
 #!/bin/bash
 
 logFile="/home/$USER/.xprofile.log"
+
+pulseaudio -D &> logFile
+
 date >> $logFile
 echo $@ >> $logFile
 
