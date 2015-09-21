@@ -14,13 +14,14 @@ bindkey -e
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/nic/.zshrc'
 
-autoload -Uz compinit
+autoload -Uz compinit compdef
 autoload -U colors; colors
 compinit
 # End of lines added by compinstall
 
 export PATH=$PATH:/home/nic/bin/
 export TERM=xterm
+export COLORTERM=urxvt
 export EDITOR="/usr/bin/vim"
 export BROWSER="/usr/bin/google-chrome-stable"
 #export JAVA_HOME="/usr/lib/jvm/java-7-openjdk/bin/java"
@@ -58,9 +59,12 @@ PROMPT="[%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m(%l)%{$reset_color%}] %{$
 alias ls='ls -sh1 --color'
 alias hal='ls -halp'
 alias grep='grep --color'
-alias egrep='grep -E -o --color'
+alias egrep='grep -E --color'
 alias pingg="ping www.google.co.uk"
 alias spammers="sudo cat /var/log/fail2ban.log | egrep 'Ban.+' | awk '{print $2}' > /tmp/spammers; sort /tmp/spammers | uniq | xargs -I % curl -silent http://www.whois.com/whois/% | egrep 'country:\s*..' > ~/spammers"
 alias l="ls"
 alias lock='xscreensaver-command --lock'
 alias scrot='scrot ~/screenshots/%Y-%m-%d-%T-screenshot.png'
+alias less="less -R"
+alias more="less"
+source /usr/share/nvm/init-nvm.sh
