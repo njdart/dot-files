@@ -24,7 +24,10 @@ if os.geteuid() == 0:
 # where usesUserHome is boolean True/False
 # and destination is a directory
 configFiles = [
-  ("/etc/X11/xorg.conf.d/", ["10-keyboard.conf"]),
+  ("/etc/X11/xorg.conf.d/", [
+    "10-keyboard.conf",
+    "50-synaptics.conf"
+  ]),
   ("/etc/", ["mpd.conf"]),
   ("/etc/lightdm/", [
      "greeters",
@@ -49,9 +52,17 @@ configFiles = [
     ".xprofile",
     ".xscreensaver",
     ".xinitrc",
-    ".zshrc"
+    ".zshrc",
+    ".tint3rc"
   ]),
-  ("$HOME/.confg/sublime-text-3/Packages/User/", ["Default (Linux).sublime-keymap"]),
+  ("$HOME/.config/sublime-text-3/Packages/User/", [
+    "Default (Linux).sublime-keymap",
+    "Preferences.sublime-settings"
+  ]),
+  ("$HOME/.config/sublime-text-2/Packages/User/", [
+    "Default (Linux).sublime-keymap",
+    "Preferences.sublime-settings"
+  ]),
   ("$HOME/screenshots/", []), # this is only to satisfy the scrot alias in .zshrc
 ]
 

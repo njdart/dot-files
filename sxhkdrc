@@ -84,7 +84,11 @@ super + Return
 	urxvt
 
 super + p
-	dmenu_run
+        rofi -show run	
+
+super + shift + p
+        rofi -show ssh
+
 
 # make sxhkd reload its configuration files:
 super + Escape
