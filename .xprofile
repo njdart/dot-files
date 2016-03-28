@@ -2,14 +2,14 @@
 
 logFile="/home/$USER/.xprofile.log"
 
-pulseaudio -D &> logFile
+pulseaudio -D &>> $logFile
 
 date >> $logFile
 echo $@ >> $logFile
 
 case $1 in
   bspwm)
-     sxhkd & &>> logFile
+     sxhkd -s /tmp/sxhkd.fifo &>> $logFile &
      urxvt &
      wmname LG3D
      ;;

@@ -33,7 +33,10 @@ configFiles = [
      "greeters",
      "lightdm.conf"
   ]),
-  ("$HOME/bin/", ["backgrounds"]),
+  ("$HOME/bin/", [
+    "backgrounds",
+    "wifi-repeater"
+  ]),
   ("$HOME/.config/awesome/", [
     "brilliant",
     "icons",
