@@ -10,6 +10,7 @@ echo $@ >> $logFile
 case $1 in
   bspwm)
      sxhkd -s /tmp/sxhkd.fifo &>> $logFile &
+     compton --backend glx --vsync opengl &
      urxvt &
      wmname LG3D
      ;;
