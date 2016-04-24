@@ -1,0 +1,29 @@
+[[bar]]
+ fontcolor #ffffff
+ background #55000000
+ borderwidth 0
+ padding 5
+ margin 0
+ width 1920
+ manual-margin-left 3840
+ location top
+ options debug
+
+ left
+
+ center
+
+ right 
+   networkLabel
+   networkUsage
+
+[networkLabel]
+ id text
+ source wlp2s0
+
+[networkUsage]
+ id graph
+ source multi-network enp3s0
+ targets upload download
+ upload up x100 #EE5E5E
+ download down x1 #49639F

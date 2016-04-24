@@ -1,0 +1,55 @@
+[[bar]]
+ fontcolor #ffffff
+ background #55000000
+ borderwidth 0
+ padding 5
+ margin 0
+ width 1920
+ manual-margin-left 1920
+ location top
+ debug
+
+ left
+    activeDesktop
+
+ center
+    activeWindowName
+ right
+    time
+    spacer
+    date
+
+[activeWindowName]
+ id active
+ source window_title
+
+[activeDesktop]
+  id workspace
+  format %R
+  current HIGHLIGHT|UNDERLINE
+  active:background #10FF0000
+
+# split time and date, looks better on a dual monitor system
+[time]
+  id clock
+  timeout 5
+  format %H:%M:%S
+
+[spacer]
+  id text
+  source | 
+
+[date]
+  id clock
+  format %A %d %b %g
+
+[networkLabel]
+  id text
+  source wlp2s0
+
+[networkUsage]
+  id graph
+  source multi-network enp3s0
+  targets upload download
+  upload up x100 #EE5E5E
+  download down x1 #49639F
