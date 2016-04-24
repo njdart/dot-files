@@ -11,7 +11,21 @@ bspc config top_padding		23
 
 tint3 &
 compoton &
-bspc monitor -d I II III IV V VI VII VIII IX X
+
+case `hostname` in
+  "KOCHANSKI")
+    bspc monitor -d I II III IV V VI VII VIII IX X
+    bspc monitor DVI-D-0 -d I II III
+    bspc monitor HDMI-0 -d IV V VI VII
+    bspc monitor DVI-I-1 -d VIII IX X
+    ;;
+  "ARCHY")
+    bspc monitor -d I II III IV V VI VII VIII IX X
+    bspc monitor DVI-D-1 -d I II III
+    bspc monitor HDMI-0 -d IV V VI VII
+    bspc monitor DVI-I-0 -d VIII IX X
+    ;;
+esac
 
 feh --bg-scale ~/.config/awesome/brilliant/background.jpg
 

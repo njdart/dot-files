@@ -19,7 +19,7 @@ autoload -U colors; colors
 compinit
 # End of lines added by compinstall
 
-export PATH=$PATH:/home/nic/bin/
+export PATH=$PATH:/home/nic/bin/:/home/nic/.gem/ruby/2.3.0/bin
 export TERM=xterm
 export COLORTERM=urxvt
 export EDITOR="/usr/bin/vim"

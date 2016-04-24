@@ -46,6 +46,9 @@ super + {comma,period}
 super + bracket{left,right}
 	bspc desktop -f {prev,next}
 
+super + ctrl + bracket{left,right}
+        bspc monitor -f {prev,next}
+
 super + ctrl + {h,j,k,l}
 	bspc node -p {left,down,up,right}
 
