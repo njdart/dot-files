@@ -10,9 +10,12 @@ bspc config focus_by_distance   true
 bspc config history_aware_focus true
 bspc config top_padding		23
 
+bspc config click_to_focus     true
+
+bspc monitor -d I II III IV V VI VII VIII IX X
+
 case `hostname` in
   "KOCHANSKI")
-    bspc monitor -d I II III IV V VI VII VIII IX X
     bspc monitor DVI-D-0 -d I II III
     bspc monitor HDMI-0 -d IV V VI VII
     bspc monitor DVI-I-1 -d VIII IX X
@@ -21,18 +24,13 @@ case `hostname` in
     tint3 -c ~/.tint3rc.KOCHANSKI.left &
     tint3 -c ~/.tint3rc.KOCHANSKI.right &
     ;;
-  "ARCHY")
-    bspc monitor -d I II III IV V VI VII VIII IX X
-    bspc monitor HDMI-4 -d I II III IV V
-    bspc monitor DVI-I-1 -d VI VII VIII IX X
-    bspc config -m DVI-I-1 top_padding 0
-
-    tint3 -c ~/.tint3rc.ARCHY &
+  "QUEEG500")
+    tint3 -c ~/.tint3rc.QUEEG500 &
     ;;
 esac
 
 compoton &
 
-feh --bg-scale ~/.config/background
+feh --bg-fill --no-xinerama ~/.config/background
 
 bspc rule -a Chromium desktop=^2

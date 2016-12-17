@@ -3,8 +3,7 @@
  background #55000000
  borderwidth 0
  padding 5
- manual-margin-left 0
- width 1920
+ margin 0
  location top
  options debug
  left
@@ -14,11 +13,12 @@
    spacerb
    time
  right 
-    loadavg
-    spacera
-    upload
-    download
-    spacera
+#    loadavg
+#    spacera
+#    upload
+#    download
+#    spacera
+   batteryone
 
 [loadavg]
  id shell
@@ -61,11 +61,19 @@
 
 [download]
  id graph
- source network eno1 down
+ source network wlp2s0 down
  forground #D58D6B
 
 [upload]
  id graph
- source network eno1 up
+ source network wlp2s0 up
  shell dmenu_run
  forground #748DA6
+
+[batteryone]
+ id scale
+ source battery BAT0
+ high_font #00FF00
+ med_font #FF0000
+ low_font #222222
+ low_color #FF0000
