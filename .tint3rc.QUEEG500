@@ -1,0 +1,79 @@
+[[bar]]
+ fontcolor #ffffff
+ background #55000000
+ borderwidth 0
+ padding 5
+ margin 0
+ location top
+ options debug
+ left
+   active
+ center
+   date
+   spacerb
+   time
+ right 
+#    loadavg
+#    spacera
+#    upload
+#    download
+#    spacera
+   batteryone
+
+[loadavg]
+ id shell
+ source  cat /proc/loadavg 
+
+[wlp2s0]
+ id text
+ source wlp2s0
+
+[ip]
+ id shell
+ source /sbin/ip -o -4 addr list wlp2s0 | awk '{print $4}' | cut -d/ -f1
+
+[active]
+ id active
+ source window_title
+
+[desktops]
+ id workspace
+ format %J %U
+ current HIGHLIGHT|UNDERLINE
+
+# split time and date, looks better on a dual monitor system
+[time]
+ id clock
+ timeout 5
+ format %H:%M
+
+[date]
+ id clock
+ format %a %d
+
+[spacera]
+ id text
+ source //
+
+[spacerb]
+ id text
+ source -
+
+[download]
+ id graph
+ source network wlp2s0 down
+ forground #D58D6B
+
+[upload]
+ id graph
+ source network wlp2s0 up
+ shell dmenu_run
+ forground #748DA6
+
+[batteryone]
+ id scale
+ source battery BAT0
+ high_font #00FF00
+ med_font #FF0000
+ low_font #222222
+ low_color #FF0000
