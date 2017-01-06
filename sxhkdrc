@@ -77,20 +77,20 @@ super + {_,shift + }{1-9,0}
   bspc {desktop -f,node -d} ^{1-9,10}
 
 # Mouse Focus
-~button1
-  bspc pointer -g focus
+#~button1
+#  bspc pointed -g focus
 
 # Left Click Move, Middle Click Resize Side, Right Click Resize Corner
-super + button{1-3}
-  bspc pointer -g {move,resize_side,resize_corner}
+#super + button{1-3}
+#  bspc pointed -g {move,resize_side,resize_corner}
 
 # ??
-super + !button{1-3}
-  bspc pointer -t %i %i
+#super + !button{1-3}
+#  bspc pointed -t %i %i
 
 # ??
-super + @button{1-3}
-  bspc pointer -u
+#super + @button{1-3}
+#  bspc pointed -u
 
 # cancel the preselection for the focused desktop
 super + ctrl + shift + space
@@ -106,6 +106,10 @@ super + ctrl + space
 super + Return
   urxvt
 
+# Launch NCMPCPP in dropdown terminal
+super + shift + Return
+  tdrop -a -w 1920 -y 20 -x 1920 -f "-e ncmpcpp" urxvt && bspc node -f last
+
 # ROFI launcher
 super + p
         rofi -show run  
@@ -113,6 +117,9 @@ super + p
 # ROFI SSH 
 super + shift + p
         rofi -show ssh
+
+super + shift + space
+        rofi -show window
 
 # Reload sxhkd config
 super + Escape
