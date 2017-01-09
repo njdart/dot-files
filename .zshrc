@@ -29,8 +29,11 @@ export TERM=xterm
 export COLORTERM=urxvt
 export EDITOR="/usr/bin/vim"
 export BROWSER="/usr/bin/google-chrome-stable"
+export GOPATH="/home/nic/go"
 #export JAVA_HOME="/usr/lib/jvm/java-7-openjdk/bin/java"
 #export IDEA_JDK=$JAVA_HOME
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/cuda/lib64"
+export CUDA_HOME=/opt/cuda/
 
 # key bindings
 bindkey "\e[1~" beginning-of-line
@@ -61,6 +64,9 @@ bindkey '^i' expand-or-complete-prefix
 PROMPT="[%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m(%l)%{$reset_color%}] %{$fg_no_bold[yellow]%}%~ %{$reset_color%}%# "
 #RPROMPT="[%{$fg_no_bold[yellow]%}%?%{$reset_color%}] [%{$fg[magenta]%}%T %D%{$reset_color%}]"
 
+# Stop Ctl+S
+stty -ixon
+
 alias ls='ls -sh1 --color'
 alias hal='ls -halp'
 alias grep='grep -n --color=always'
@@ -69,7 +75,7 @@ alias pingg="ping www.google.co.uk"
 alias spammers="sudo cat /var/log/fail2ban.log | egrep 'Ban.+' | awk '{print $2}' > /tmp/spammers; sort /tmp/spammers | uniq | xargs -I % curl -silent http://www.whois.com/whois/% | egrep 'country:\s*..' > ~/spammers"
 alias l="ls"
 alias lock='dm-tool lock'
-alias scrot='scrot ~/screenshots/%Y-%m-%d-%T-screenshot.png'
+alias scrot='scrot ~/screenshots/%Y-%m-%d-%T-screenshot.png -e '"'"'echo $f'"'"
 alias less="less -R"
 alias more="less"
 alias glog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
@@ -80,3 +86,7 @@ function md () {
   google-chrome-stable "file:///tmp/markdown/$1.html"
 }
 source /usr/share/nvm/init-nvm.sh
+
+markdown-gen () {
+  /usr/bin/markdown $1 > $1.html && $BROWSER $1.html
+}

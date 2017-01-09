@@ -14,5 +14,3 @@ case $1 in
      wmname LG3D
      ;;
 esac
-
-/usr/bin/xscreensaver -no-splash & #Screen savers!
