@@ -64,18 +64,6 @@ super + ctrl + {1-9}
 super + {_,shift + }{1-9,0}
   bspc {desktop -f,node -d} ^{1-9,10}
 
-# Left Click Move, Middle Click Resize Side, Right Click Resize Corner
-#super + button{1-3}
-#  bspc pointed -g {move,resize_side,resize_corner}
-
-# ??
-#super + !button{1-3}
-#  bspc pointed -t %i %i
-
-# ??
-#super + @button{1-3}
-#  bspc pointed -u
-
 # cancel the preselection for the focused desktop
 super + ctrl + shift + space
   bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
