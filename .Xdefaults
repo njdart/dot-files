@@ -22,8 +22,8 @@
 ! fonts
 ! run "fc-list" for a list of available fonts
 
-URxvt*font: xft:Terminus:pixelsize=12
-!URxvt*font: xft:Source Code Pro:pixelsize=12
+!URxvt*font: xft:Terminus:pixelsize=12
+URxvt*font: xft:Source Code Pro:pixelsize=12
 !URxvt*font: xft:Oxygen Mono:pixelsize=12
 !URxvt*font: xft:Anonymous Pro:size=12
 
