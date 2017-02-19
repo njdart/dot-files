@@ -11,7 +11,9 @@ bspc config history_aware_focus true
 
 bspc monitor -d I II III IV V VI VII VIII IX X
 
-case `hostname` in
+HOSTNAME=`hostname`
+
+case $HOSTNAME in
   "KOCHANSKI")
     bspc monitor DVI-D-0 -d I II III
     bspc monitor HDMI-0 -d IV V VI VII
@@ -21,7 +23,7 @@ case `hostname` in
     ;;
 esac
 
-polybar -c "~/.config/polybar/config.polybar" $HOST &
+exec polybar $HOSTNAME &
 
 feh --bg-max --no-xinerama ~/.config/background
 
