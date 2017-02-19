@@ -1,15 +1,10 @@
 #!/bin/bash
 
-logFile="/home/$USER/.xprofile.log"
-
-pulseaudio -D &>> $logFile
-
-date >> $logFile
-echo $@ >> $logFile
+pulseaudio -D
 
 case $1 in
   bspwm)
-     sxhkd -s /tmp/sxhkd.fifo &>> $logFile &
+     sxhkd -s /tmp/sxhkd.fifo &
      compton --backend glx --vsync opengl &
      wmname LG3D
      ;;

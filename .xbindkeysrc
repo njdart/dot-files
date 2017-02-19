@@ -25,7 +25,3 @@
 "scrot ~/scrots/%Y-%m-%d_$wx$h.png"
     m:0x1 + c:107
     Shift + Print
-
-"(Scheme func"
-    m:0x0 + c:96
-    F12

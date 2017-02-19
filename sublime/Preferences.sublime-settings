@@ -1,0 +1,15 @@
+{
+	"default_line_ending": "unix",
+	"folder_exclude_patterns":
+	[
+		".hg",
+		"CVS"
+	],
+	"font_size": 11,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"tab_size": 2,
+	"translate_tabs_to_spaces": true
+}

@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# Taken from the arch wiki:
+# https://wiki.archlinux.org/index.php/Software_access_point
+#
+
+iw dev wlp2s0 interface add wlp2s0_station type station || exit 1
+iw dev wlp2s0 interface add wlp2s0_ap      type __ap || exit 1
+
+ip link set dev wlp2s0_station address 12:34:56:78:ab:cd || exit 1
+ip link set dev wlp2s0_ap      address 12:34:56:78:ab:ce || exit 1
+
