@@ -26,5 +26,3 @@ esac
 exec polybar $HOSTNAME &
 
 feh --bg-max --no-xinerama ~/.config/background
-
-bspc rule -a Chromium desktop=^2

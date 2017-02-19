@@ -50,11 +50,20 @@
 [bar/KOCHANSKI]
   inherit = bar/base
   monitor = ${env:MONITOR:HDMI-0}
-  modules-right = filesystem vpn enp3s0 date
+  modules-right = filesystem vpn enp3s0 pkg date
 
 [bar/QUEEG500]
   inherit = bar/base
   modules-right = filesystem xbacklight volume memory cpu wlan eth battery temperature date powermenu
+
+[module/pkg]
+  type = custom/script
+  interval = 1200
+  format = <label>
+  format-underline = #dc322f
+  label = "%output:0:60%"
+  exec = ~/.config/polybar/pkg.sh
+  exec-if = "ping -q -w 2 -c 1 176.34.135.167 > /dev/null"
 
 [module/filesystem]
   type = internal/fs
