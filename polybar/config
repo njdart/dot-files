@@ -54,7 +54,7 @@
 
 [bar/QUEEG500]
   inherit = bar/base
-  modules-right = filesystem xbacklight volume memory cpu wlan eth battery temperature date powermenu
+  modules-right = filesystem volume wlan vpn battery temperature pkg date
 
 [module/pkg]
   type = custom/script
@@ -151,7 +151,7 @@
 
 [module/wlan]
   type = internal/network
-  interface = net1
+  interface = wlp2s0
   interval = 3.0
 
   format-connected = <ramp-signal> <label-connected>
@@ -172,18 +172,11 @@
   ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/vpn]
-  type = internal/network
-  interface = tun0
-  interval = 3.0
-
-  label-connected = ⚩
-  format-connected = <label-connected>
-  format-connected-underline = #55aa55
-  format-connected-prefix-foreground = ${colors.foreground-alt}
-
-  label-disconnected = ⚩
-  format-disconnected = <label-disconnected>
-  format-disconnected-underline = ${colors.foreground-alt-warn}
+  type = custom/script
+  exec = pgrep openvpn
+  interval = 5
+  label = ⚩
+  format-underline = #55aa55
 
 [module/enp3s0]
   type = internal/network
