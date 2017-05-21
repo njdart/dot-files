@@ -1,5 +1,6 @@
 {
 	"default_line_ending": "unix",
+	"dictionary": "Packages/Language - English/en_GB.dic",
 	"folder_exclude_patterns":
 	[
 		".hg",
