@@ -25,4 +25,4 @@ esac
 
 exec polybar $HOSTNAME &
 
-feh --bg-max --no-xinerama ~/.config/background
+feh --bg-tile --no-xinerama ~/.config/background
