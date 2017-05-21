@@ -52,9 +52,9 @@ super + ctrl + {h,j,k,l}
 super + alt + {h,j,k,l}
   bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
-## contract a window by moving one of its side inward
-#super + alt + shift + {h,j,k,l}
-#  bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+# contract a window by moving one of its side inward
+super + alt + shift + {h,j,k,l}
+  bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
 # preselect the ratio
 super + ctrl + {1-9}
@@ -78,21 +78,18 @@ super + ctrl + space
 super + Return
   urxvt
 
-# Launch NCMPCPP in dropdown terminal
-super + shift + Return
-  tdrop -a -w 1920 -y 20 -x 1920 -f "-e ncmpcpp" urxvt && bspc node -f last
 
 # ROFI launcher
 super + p
-        rofi -show run  
+  rofi -show run
 
 # ROFI SSH 
 super + shift + p
-        rofi -show ssh
+  rofi -show ssh
 
 # ROFI windows
 super + space
-        rofi -show window
+  rofi -show window
 
 # Reload sxhkd config
 super + Escape
