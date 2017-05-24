@@ -32,7 +32,13 @@ configs = [
         "./xorg/*"
     ],
     lambda x: socket.gethostname() == "QUEEG500" or "Only for QUEEG500"), # Laptop Only
-    ("/etc", ["./mpd.conf"]),
+    ("/etc", [
+        ("./mpd.conf.KOCHANSKI", "mpd.conf")
+    ], lambda x: socket.gethostname() == "KOCHANSKI" or "Only for Kochanski"),
+    ("/etc", [
+        ("./mpd.conf.QUEEG500", "mpd.conf")
+    ], lambda x: socket.gethostname() == "QUEEG500" or "Only for QUEEG500"),
+    ("/etc", ["./mpd.conf"], lambda x: socket.gethostname() == "KOCHANSKI" or "Only for Kochanski"),
     ("$HOME/bin", [
         "./bin/*"
     ]),

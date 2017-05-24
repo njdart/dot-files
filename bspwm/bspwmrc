@@ -20,6 +20,7 @@ case $HOSTNAME in
     bspc monitor DVI-I-1 -d VIII IX X
     ;;
   "QUEEG500")
+    xbindkeys
     ;;
 esac
 
