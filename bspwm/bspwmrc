@@ -6,24 +6,32 @@ bspc config click_to_focus      true
 bspc config split_ratio         0.52
 bspc config borderless_monocle  true
 bspc config gapless_monocle     true
-bspc config focus_by_distance   true
-bspc config history_aware_focus true
-
-bspc monitor -d I II III IV V VI VII VIII IX X
 
 HOSTNAME=`hostname`
 
+polybar $HOSTNAME &
+
 case $HOSTNAME in
   "KOCHANSKI")
-    bspc monitor DVI-D-0 -d I II III
-    bspc monitor HDMI-0 -d IV V VI VII
-    bspc monitor DVI-I-1 -d VIII IX X
+    xrandr --output DVI-D-0 --mode 1920x1080 --pos 0x0      --rotate left \
+           --output HDMI-0  --mode 1920x1080 --pos 1080x300 --rotate normal --primary \
+           --output DVI-I-1 --mode 1920x1080 --pos 3000x0   --rotate right
+
+    # Rename monitors
+    bspc monitor DVI-D-0 -n left
+    bspc monitor HDMI-0 -n center
+    bspc monitor DVI-I-1 -n right
+
+    bspc monitor left -d I II III
+    bspc monitor center -d IV V VI VII
+    bspc monitor right -d VIII IX X
+
+    bspc config -m left top_padding 5
+    bspc config -m left bottom_padding 5
     ;;
   "QUEEG500")
     xbindkeys
     ;;
 esac
-
-exec polybar $HOSTNAME &
 
 feh --bg-tile --no-xinerama ~/.config/background
