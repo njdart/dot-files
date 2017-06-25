@@ -30,6 +30,8 @@ case $HOSTNAME in
     bspc config -m left bottom_padding 5
     ;;
   "QUEEG500")
+    bspc monitor -d I II III IV V VI VII VIII IX X
+
     xbindkeys
     ;;
 esac
