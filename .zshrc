@@ -26,8 +26,8 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.cabal/bin:$PATH
 
 export TERM=xterm
-export COLORTERM=urxvt
-export EDITOR="/usr/bin/vim"
+export COLORTERM=terminator
+export EDITOR="/usr/bin/nvim"
 export BROWSER="/usr/bin/google-chrome-stable"
 export GOPATH="/home/nic/go"
 #export JAVA_HOME="/usr/lib/jvm/java-7-openjdk/bin/java"
@@ -42,12 +42,8 @@ bindkey "\e[5~" beginning-of-history
 bindkey "\e[6~" end-of-history
 bindkey "\e[3~" delete-char
 bindkey "\e[2~" quoted-insert
-bindkey "\e[5C" forward-word
-bindkey "\eOc" emacs-forward-word
-bindkey "\e[5D" backward-word
-bindkey "\eOd" emacs-backward-word
-bindkey "\e\e[C" forward-word
-bindkey "\e\e[D" backward-word
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
 bindkey "^H" backward-delete-word
 # for rxvt
 bindkey "\e[8~" end-of-line
@@ -79,6 +75,7 @@ alias scrot='scrot ~/screenshots/%Y-%m-%d-%T-screenshot.png -e '"'"'echo $f'"'"
 alias less="less -R"
 alias more="less"
 alias glog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
+alias vim="nvim"
 
 function md () {
   mkdir -p /tmp/markdown

@@ -76,15 +76,12 @@ super + ctrl + space
 
 # Launch Terminal
 super + Return
-  urxvt
-
-# Launch NCMPCPP in dropdown terminal
-super + shift + Return
-  tdrop -a -w 1920 -y 20 -x 1920 -f "-e ncmpcpp" urxvt && bspc node -f last
+  terminator
 
 # ROFI launcher
 super + p
-        rofi -show run  
+        rofi -combi-modi window,drun -show combi -modi combi
+        # rofi -show run  
 
 # ROFI SSH 
 super + shift + p
