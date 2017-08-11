@@ -50,7 +50,7 @@
 [bar/KOCHANSKI]
   inherit = bar/base
   monitor = ${env:MONITOR:HDMI-0}
-  modules-right = filesystem vpn enp3s0 pkg date
+  modules-right = filesystem mediaFs vpn enp3s0 pkg date
 
 [bar/QUEEG500]
   inherit = bar/base
@@ -71,6 +71,16 @@
 
   mount-0 = /
   mount-1 = /home
+
+  label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+  label-unmounted = %mountpoint% not mounted
+  label-unmounted-foreground = ${colors.foreground-alt}
+
+[module/mediaFs]
+  type = internal/fs
+  interval = 25
+
+  mount-0 = /media
 
   label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
   label-unmounted = %mountpoint% not mounted

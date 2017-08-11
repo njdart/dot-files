@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Log stdout and stderr to file
+exec &> /tmp/xprofile.log
+
+echo $1
+
 pulseaudio -D
 
 case $1 in
