@@ -1,4 +1,4 @@
-#Dot Files
+Dot Files
 =========
 
 I use BSPWM on Arch linux on both my desktop and laptops, here are some configurations for them :)
