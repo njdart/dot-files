@@ -76,8 +76,7 @@ super + ctrl + space
 
 # Launch Terminal
 super + Return
-  urxvt
-
+  terminator
 
 # ROFI launcher
 super + p

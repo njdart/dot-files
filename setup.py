@@ -34,13 +34,19 @@ configs = [
     lambda x: socket.gethostname() == "QUEEG500" or "Only for QUEEG500"), # Laptop Only
     ("/etc", [
         ("./mpd.conf.KOCHANSKI", "mpd.conf")
-    ], lambda x: socket.gethostname() == "KOCHANSKI" or "Only for Kochanski"),
+    ],
+    lambda x: socket.gethostname() == "KOCHANSKI" or "Only for Kochanski"),
     ("/etc", [
         ("./mpd.conf.QUEEG500", "mpd.conf")
-    ], lambda x: socket.gethostname() == "QUEEG500" or "Only for QUEEG500"),
+    ],
+    lambda x: socket.gethostname() == "QUEEG500" or "Only for QUEEG500"),
     ("/etc", ["./mpd.conf"], lambda x: socket.gethostname() == "KOCHANSKI" or "Only for Kochanski"),
     ("$HOME", [
         "./bin"
+    ]),
+    ("$HOME/.config", [
+        "./nvim",
+        "./terminator"
     ]),
     ("$HOME/.config/sxhkd", ["./bspwm/sxhkdrc"]),
     ("$HOME/.config/bspwm", ["./bspwm/bspwmrc"]),
@@ -178,7 +184,7 @@ for config in configs:
                     continue;
 
                 else:
-                    print("  => Symlinking {} to {} to ".format(source, fullDestinationPath))
+                    print("  => Symlinking {} to {}".format(source, fullDestinationPath))
                     os.symlink(source, fullDestinationPath)
 
             except OSError as e:
