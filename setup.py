@@ -46,7 +46,8 @@ configs = [
     ]),
     ("$HOME/.config", [
         "./nvim",
-        "./terminator"
+        "./terminator",
+        "./rofi"
     ]),
     ("$HOME/.config/sxhkd", ["./bspwm/sxhkdrc"]),
     ("$HOME/.config/bspwm", ["./bspwm/bspwmrc"]),
@@ -55,7 +56,6 @@ configs = [
         "./.muttrc",
         "./.vimrc",
         "./.Xdefaults",
-        "./.Xresources",
         "./.xprofile",
         "./.zshrc"
     ]),
