@@ -1,4 +1,3 @@
-abs
 acpi
 adobe-source-code-pro-fonts
 adobe-source-sans-pro-fonts
@@ -33,7 +32,6 @@ nautilus
 ncmpcpp
 nodejs
 ntfs-3g
-numix-themes
 openssh
 openvpn
 oxygen-gtk2
@@ -46,7 +44,6 @@ rxvt-unicode
 screenfetch
 scrot
 sshfs
-steam
 sudo
 sxhkd
 terminus-font

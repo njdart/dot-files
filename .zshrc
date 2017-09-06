@@ -78,13 +78,18 @@ alias glog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold 
 alias vim="nvim"
 alias diff='diff --color=always'
 
-function md () {
-  mkdir -p /tmp/markdown
-  markdown $1 > "/tmp/markdown/$1.html"
-  google-chrome-stable "file:///tmp/markdown/$1.html"
-}
-source /usr/share/nvm/init-nvm.sh
+if [ "$(hostname)" = 'KOCHANSKI' ]; then
+  source /usr/share/nvm/init-nvm.sh
+else
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
 
-markdown-gen () {
-  /usr/bin/markdown $1 > $1.html && $BROWSER $1.html
+
+function markdown-gen () {
+  echo "<!DOCTYPE html><html><head><link rel=\"stylesheet\" href=\"https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css\"></head><body class=\"markdown-body\">" > $1.html
+  /usr/bin/markdown $1 >> $1.html
+  echo "</body></html>" >> $1.html
+  $BROWSER $1.html
 }

@@ -30,8 +30,7 @@ NOCOLOUR = "\033[0m"
 configs = [
     ("/etc/X11/xorg.conf.d", [
         "./xorg/*"
-    ],
-    lambda x: socket.gethostname() == "QUEEG500" or "Only for QUEEG500"), # Laptop Only
+    ]),
     ("/etc", [
         ("./mpd.conf.KOCHANSKI", "mpd.conf")
     ],
