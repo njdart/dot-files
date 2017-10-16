@@ -56,6 +56,11 @@
   inherit = bar/base
   modules-right = filesystem volume wlan vpn battery temperature pkg date
 
+[bar/ARCHY]
+  inherit = bar/base
+  monitor = ${env:MONITOR:DVI-I-1}
+  modules-right = filesystem volume eth1 vpn pkg date
+
 [module/pkg]
   type = custom/script
   interval = 1200
@@ -191,6 +196,22 @@
 [module/enp3s0]
   type = internal/network
   interface = enp3s0
+  interval = 3.0
+
+  format-connected-underline = #55aa55
+  format-connected-prefix = " "
+  format-connected-prefix-foreground = ${colors.foreground-alt}
+  label-connected = %local_ip%
+
+  format-disconnected =
+  ;format-disconnected = <label-disconnected>
+  ;format-disconnected-underline = ${self.format-connected-underline}
+  ;label-disconnected = %ifname% disconnected
+  ;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/eth1]
+  type = internal/network
+  interface = eth1
   interval = 3.0
 
   format-connected-underline = #55aa55

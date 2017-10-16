@@ -34,6 +34,18 @@ case $HOSTNAME in
 
     xbindkeys
     ;;
+  "ARCHY")
+    xrandr --output DVI-I-1 --mode 1920x1080 --pos 0x0 --primary \
+            --output VGA-1   --mode 1920x1080 --pos 1920x0
+
+    bspc monitor DVI-I-1 -n primary
+    bspc monitor VGA-1 -n secondary
+
+    bspc monitor primary -d I II III IV V
+    bspc monitor secondary -d VI VII VIII IX X
+    bspc config -m secondary top_padding 5
+    bspc config -m secondary bottom_padding 5
+    ;;
 esac
 
 feh --bg-tile --no-xinerama ~/.config/background
