@@ -90,6 +90,10 @@ super + shift + p
 super + space
   rofi -show window
 
+# ROFI hamster integration
+super + shift + Return
+  hamster start $(hamster activities | rofi -dmenu -select $(hamster current | cut -d " " -f 3))
+
 # Reload sxhkd config
 super + Escape
   pkill -USR1 -x sxhkd

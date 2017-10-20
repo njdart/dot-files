@@ -4,6 +4,8 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 											# install zsh-colour-highlighting
 
 source /usr/share/doc/pkgfile/command-not-found.zsh					# sudo pacman -S pkgfile
+[ -f /etc/profile.d/fzf.zsh ] && source /etc/profile.d/fzf.zsh
+
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.history
 HISTSIZE=1000
@@ -34,6 +36,7 @@ export GOPATH="/home/nic/go"
 #export IDEA_JDK=$JAVA_HOME
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/cuda/lib64"
 export CUDA_HOME=/opt/cuda/
+export FZF_DEFAULT_OPTS="--reverse --ansi --multi"
 
 # key bindings
 bindkey "\e[1~" beginning-of-line
@@ -64,7 +67,7 @@ PROMPT="[%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m(%l)%{$reset_color%}] %{$
 stty -ixon
 
 alias ls='ls -sh1 --color'
-alias hal='ls -halp'
+alias hal='ls -hAlp --group-directories-first'
 alias grep='grep -n --color=always'
 alias egrep='grep -E --color=always'
 alias pingg="ping www.google.co.uk"
@@ -74,7 +77,8 @@ alias lock='dm-tool lock'
 alias scrot='scrot ~/screenshots/%Y-%m-%d-%T-screenshot.png -e '"'"'echo $f'"'"
 alias less="less -R"
 alias more="less"
-alias glog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
+alias glog="git log --color=always --format="%C(auto)%h %<(15,trunc)%an %s %C(black)%C(bold)%cr %C(auto)%d" | fzf | awk '{print $1}'"
+#alias glog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
 alias vim="nvim"
 alias diff='diff --color=always'
 

@@ -45,16 +45,17 @@ configs = [
     ]),
     ("$HOME/.config", [
         "./nvim",
-        "./terminator"
+        "./terminator",
+        "./gitignore_global"
     ]),
     ("$HOME/.config/sxhkd", ["./bspwm/sxhkdrc"]),
     ("$HOME/.config/bspwm", ["./bspwm/bspwmrc"]),
+    ("$HOME/.config", ["./rofi"]),
     ("$HOME/.ncmpcpp", [("./ncmpcpp", "config")]),
     ("$HOME", [
         "./.muttrc",
         "./.vimrc",
         "./.Xdefaults",
-        "./.Xresources",
         "./.xprofile",
         "./.zshrc"
     ]),
@@ -202,3 +203,8 @@ for config in configs:
             print(NOCOLOUR, end='')
         else :
             print(e)
+
+print()
+print("Also Run:")
+print()
+print(" # git config --global core.excludesfile ~/.config/gitignore_global")
