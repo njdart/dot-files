@@ -40,13 +40,14 @@ configs = [
     ],
     lambda x: socket.gethostname() == "QUEEG500" or "Only for QUEEG500"),
     ("/etc", ["./mpd.conf"], lambda x: socket.gethostname() == "KOCHANSKI" or "Only for Kochanski"),
-    ("$HOME/bin", [
-        "./bin/*"
+    ("$HOME", [
+        "./bin"
     ]),
     ("$HOME/.config", [
         "./nvim",
         "./terminator",
         "./gitignore_global"
+        "./rofi"
     ]),
     ("$HOME/.config/sxhkd", ["./bspwm/sxhkdrc"]),
     ("$HOME/.config/bspwm", ["./bspwm/bspwmrc"]),

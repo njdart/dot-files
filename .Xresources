@@ -1,0 +1,11 @@
+#
+# ROFI
+#
+rofi.color-enabled:                  true
+rofi.color-normal:                   argb:00000000, #1aa, argb:11FFFFFF, #1aa,#333
+rofi.color-urgent:                   argb:00000000, #f99, argb:11FFFFFF, #f99,#333
+rofi.color-active:                   argb:00000000, #aa1, argb:11FFFFFF, #aa1,#333
+rofi.color-window:                   argb:ee333333, #1aa,#1aa
+rofi.separator-style:                dash
+rofi.font:                           snap 10
+rofi.terminal:                       terminator
