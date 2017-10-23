@@ -1,41 +1,23 @@
 #!/bin/bash
 # External sources
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh	# zsh syntax highlighting
-											# install zsh-colour-highlighting
-
-source /usr/share/doc/pkgfile/command-not-found.zsh					# sudo pacman -S pkgfile
-[ -f /etc/profile.d/fzf.zsh ] && source /etc/profile.d/fzf.zsh
-
-# Lines configured by zsh-newuser-install
 HISTFILE=~/.history
 HISTSIZE=1000
 SAVEHIST=1000
 setopt appendhistory autocd extendedglob HIST_IGNORE_DUPS
 bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/nic/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit compdef
 autoload -U colors; colors
 compinit
-# End of lines added by compinstall
 
-# setup path
-export PATH=$HOME/bin:$PATH
-export PATH=$HOME/.gem/ruby/2.3.0/bin:$PATH
-export PATH=$HOME/.local/bin:$PATH
-export PATH=$HOME/.cabal/bin:$PATH
+export PATH=$HOME/bin:/.gem/ruby/2.3.0/bin:$HOME/.local/bin:$HOME/.cabal/bin:$PATH
 
 export TERM=xterm
 export COLORTERM=terminator
 export EDITOR="/usr/bin/nvim"
 export BROWSER="/usr/bin/google-chrome-stable"
-export GOPATH="/home/nic/go"
-#export JAVA_HOME="/usr/lib/jvm/java-7-openjdk/bin/java"
-#export IDEA_JDK=$JAVA_HOME
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/cuda/lib64"
-export CUDA_HOME=/opt/cuda/
+export GOPATH="$HOME/go"
 export FZF_DEFAULT_OPTS="--reverse --ansi --multi"
 
 # key bindings
@@ -71,29 +53,20 @@ alias hal='ls -hAlp --group-directories-first'
 alias grep='grep -n --color=always'
 alias egrep='grep -E --color=always'
 alias pingg="ping www.google.co.uk"
-alias spammers="sudo cat /var/log/fail2ban.log | egrep 'Ban.+' | awk '{print $2}' > /tmp/spammers; sort /tmp/spammers | uniq | xargs -I % curl -silent http://www.whois.com/whois/% | egrep 'country:\s*..' > ~/spammers"
-alias l="ls"
 alias lock='dm-tool lock'
 alias scrot='scrot ~/screenshots/%Y-%m-%d-%T-screenshot.png -e '"'"'echo $f'"'"
 alias less="less -R"
-alias more="less"
-alias glog="git log --color=always --format="%C(auto)%h %<(15,trunc)%an %s %C(black)%C(bold)%cr %C(auto)%d" | fzf | awk '{print $1}'"
-#alias glog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
 alias vim="nvim"
 alias diff='diff --color=always'
 
-if [ "$(hostname)" = 'KOCHANSKI' ]; then
+# Git Alias
+alias gitc='git log --color=always --format="%C(auto)%h %<(15,trunc)%an %s %C(black)%C(bold)%cr %C(auto)%d" | fzf | awk '"'"'{print $1}'"'"
+alias gitt="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
+
+[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -f /usr/share/doc/pkgfile/command-not-found.zsh ] && source /usr/share/doc/pkgfile/command-not-found.zsh
+[ -f /etc/profile.d/fzf.zsh ] && source /etc/profile.d/fzf.zsh
+if [ -f /usr/share/nvm/init-nvm.sh ]; then
   source /usr/share/nvm/init-nvm.sh
-else
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
-
-function markdown-gen () {
-  echo "<!DOCTYPE html><html><head><link rel=\"stylesheet\" href=\"https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css\"></head><body class=\"markdown-body\">" > $1.html
-  /usr/bin/markdown $1 >> $1.html
-  echo "</body></html>" >> $1.html
-  $BROWSER $1.html
-}
