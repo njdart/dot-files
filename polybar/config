@@ -58,6 +58,7 @@
 
 [bar/ARCHY]
   inherit = bar/base
+  modules-center = hamster
   monitor = ${env:MONITOR:DVI-I-1}
   modules-right = filesystem volume eth1 vpn pkg date
 
@@ -337,5 +338,15 @@
   menu-2-0-exec = sudo poweroff
   menu-2-1 = cancel
   menu-2-1-exec = menu-open-0
+
+[module/hamster]
+  type = custom/script
+  interval = 2
+
+  exec = ~/.config/polybar/hamster.sh
+
+  format-prefix = " "
+  format-prefix-foreground = ${colors.foreground-alt}
+  format-close-foreground = ${colors.foreground}
 
 ; vim:ft=dosini

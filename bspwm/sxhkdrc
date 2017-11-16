@@ -92,7 +92,7 @@ super + space
 
 # ROFI hamster integration
 super + shift + Return
-  hamster start $(hamster activities | rofi -dmenu -select $(hamster current | cut -d " " -f 3))
+  hamster start $(hamster activities | rofi -dmenu -matching fuzzy -i -select $(hamster current | cut -d " " -f 3))
 
 # Reload sxhkd config
 super + Escape

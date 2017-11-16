@@ -8,6 +8,7 @@ bindkey -e
 zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit compdef
+autoload -Uz vcs_info
 autoload -U colors; colors
 compinit
 
@@ -42,9 +43,6 @@ bindkey "\e[F" end-of-line
 # completion in the middle of a line
 bindkey '^i' expand-or-complete-prefix
 
-PROMPT="[%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m(%l)%{$reset_color%}] %{$fg_no_bold[yellow]%}%~ %{$reset_color%}%# "
-#RPROMPT="[%{$fg_no_bold[yellow]%}%?%{$reset_color%}] [%{$fg[magenta]%}%T %D%{$reset_color%}]"
-
 # Stop Ctl+S
 stty -ixon
 
@@ -66,7 +64,28 @@ alias gitt="git log --graph --abbrev-commit --decorate --format=format:'%C(bold 
 [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [ -f /usr/share/doc/pkgfile/command-not-found.zsh ] && source /usr/share/doc/pkgfile/command-not-found.zsh
 [ -f /etc/profile.d/fzf.zsh ] && source /etc/profile.d/fzf.zsh
+[ -f $HOME/.config/`hostname`.zshrc ] && source $HOME/.config/`hostname`.zshrc
 if [ -f /usr/share/nvm/init-nvm.sh ]; then
   source /usr/share/nvm/init-nvm.sh
 fi
+
+# Styling
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git*' formats "%{$fg[blue]%}%b%{$reset_color%} "
+
+precmd() {
+    vcs_info
+}
+
+setopt prompt_subst
+
+PROMPT='[%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m(%l)%{$reset_color%}] %{$fg_no_bold[yellow]%}%~%{$reset_color%} ${vcs_info_msg_0_}%# '
+
+function minikube {
+  if [ ! "$(kubectl config current-context)" == 'demo.ccl-flo.com' ]; then
+    /usr/bin/minikube $@
+  else
+    echo "Kubectl context is not minikube. Refusing to work"
+  fi
+}
 
