@@ -13,14 +13,14 @@ polybar $HOSTNAME &
 
 case $HOSTNAME in
   "KOCHANSKI")
-    xrandr --output DVI-I-1 --mode 1920x1080 --pos 0x0      --rotate left \
+    xrandr --output DVI-D-0 --mode 1920x1080 --pos 0x0      --rotate left \
            --output HDMI-0  --mode 1920x1080 --pos 1080x300 --rotate normal --primary \
-           --output DVI-D-0 --mode 1920x1080 --pos 3000x0   --rotate right
+           --output DVI-I-1 --mode 1920x1080 --pos 3000x0   --rotate right
 
     # Rename monitors
-    bspc monitor DVI-D-0 -n right
+    bspc monitor DVI-D-0 -n left
     bspc monitor HDMI-0 -n center
-    bspc monitor DVI-I-1 -n left
+    bspc monitor DVI-I-1 -n right
 
     bspc monitor left -d I II III
     bspc monitor center -d IV V VI VII

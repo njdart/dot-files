@@ -9,7 +9,9 @@ zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit compdef
 autoload -Uz vcs_info
-autoload -U colors; colors
+autoload -U colors
+
+colors
 compinit
 
 export PATH=$HOME/bin:/.gem/ruby/2.3.0/bin:$HOME/.local/bin:$HOME/.cabal/bin:$PATH
@@ -31,7 +33,6 @@ bindkey "\e[2~" quoted-insert
 bindkey '^[[1;5C' forward-word
 bindkey '^[[1;5D' backward-word
 bindkey "^H" backward-delete-word
-# for rxvt
 bindkey "\e[8~" end-of-line
 bindkey "\e[7~" beginning-of-line
 # for non RH/mebian xterm, can't hurt for RH/DEbian xterm
@@ -65,13 +66,16 @@ alias gitt="git log --graph --abbrev-commit --decorate --format=format:'%C(bold 
 [ -f /usr/share/doc/pkgfile/command-not-found.zsh ] && source /usr/share/doc/pkgfile/command-not-found.zsh
 [ -f /etc/profile.d/fzf.zsh ] && source /etc/profile.d/fzf.zsh
 [ -f $HOME/.config/`hostname`.zshrc ] && source $HOME/.config/`hostname`.zshrc
-if [ -f /usr/share/nvm/init-nvm.sh ]; then
-  source /usr/share/nvm/init-nvm.sh
-fi
+[ -f /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
 
 # Styling
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git*' formats "%{$fg[blue]%}%b%{$reset_color%} "
+zstyle ':vcs_info:*' unstagedstr '!'
+zstyle ':vcs_info:*' stagedstr '*'
+zstyle ':vcs_info:*' check-for-changes true
+
+# zstyle ':vcs_info:git*' formats "%{$fg[blue]%}%b%{$reset_color%} "
+zstyle ':vcs_info:git*' formats "%{$fg[blue]%}%b%{$reset_color%}:%{$fg[red]%}(%m%u%c)%{$reset_color%}"
 
 precmd() {
     vcs_info
@@ -79,7 +83,8 @@ precmd() {
 
 setopt prompt_subst
 
-PROMPT='[%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m(%l)%{$reset_color%}] %{$fg_no_bold[yellow]%}%~%{$reset_color%} ${vcs_info_msg_0_}%# '
+PS1="[%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m%{$reset_color%}] %{$fg_no_bold[yellow]%}%~%{$reset_color%}%\\$ "
+RPS1='${vcs_info_msg_0_}'
 
 function minikube {
   if [ ! "$(kubectl config current-context)" == 'demo.ccl-flo.com' ]; then

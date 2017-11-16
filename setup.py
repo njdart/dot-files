@@ -46,7 +46,7 @@ configs = [
     ("$HOME/.config", [
         "./nvim",
         "./terminator",
-        "./gitignore_global"
+        "./gitignore_global",
         "./rofi"
     ]),
     ("$HOME/.config/sxhkd", ["./bspwm/sxhkdrc"]),
