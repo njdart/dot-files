@@ -54,15 +54,12 @@ configs = [
     ("$HOME/.config", ["./rofi"]),
     ("$HOME/.ncmpcpp", [("./ncmpcpp", "config")]),
     ("$HOME", [
-        "./.muttrc",
-        "./.vimrc",
-        "./.Xdefaults",
         "./.xprofile",
         "./.zshrc"
     ]),
     ("$HOME", ["./.xbindkeysrc"], lambda x: socket.gethostname() == "QUEEG500" or "Only for QUEEG500"),
-    ("$HOME/.config/polybar", [
-        "./polybar/*"
+    ("$HOME/.config", [
+        "./polybar"
     ]),
     ("$HOME/.config/sublime-text-3/Packages/User", [
         "./sublime/*"
