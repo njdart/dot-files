@@ -4,7 +4,7 @@ pid_file "/run/mpd/mpd.pid"
 db_file "/var/lib/mpd/mpd.db"
 state_file "/var/lib/mpd/mpdstate"
 playlist_directory "/var/lib/mpd/playlists"
-music_directory "/media/music/Music"
+music_directory "/media/music"
 
 audio_output {
   type            "pulse"
@@ -20,8 +20,8 @@ audio_output {
   format                  "44100:16:2"
 }
 
-audio_output {    
-	type		"httpd"    
+audio_output {
+	type		"httpd"
 	name		"My HTTP Stream"
 	encoder		"vorbis"		# optional, vorbis or lame
 	port		"8000"

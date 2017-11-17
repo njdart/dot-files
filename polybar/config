@@ -1,19 +1,18 @@
 [colors]
-  ;background = ${xrdb:color0:#222}
-  ;foreground = ${xrdb:color7:#222}
-
-  background = #222
-  background-alt = #444
-  foreground = #dfdfdf
-  foreground-alt = #555
-  foreground-alt-warn = #F00
-  primary = #ffb52a
-  secondary = #e60053
-  alert = #bd2c40
+  white = #FFF
+  black = #000
+  darkGrey = #222
+  grey = #444
+  lightGrey = #DFDFDF
+  red = #F00
+  green = #55aa55
+  blue = #0a81f5
+  yellow = #FFB52A
+  orange = #FF9000
+  pink = #FF00AA
 
 [settings]
   screenchange-reload = true
-  ;compositing-background = xor
   compositing-background = screen
   compositing-foreground = source
   compositing-border = over
@@ -26,61 +25,66 @@
   width: 100%
   height: 30
   radius: 0
-  background = ${colors.background}
-  foreground = ${colors.foreground}
-  line-size = 3
+  background = ${colors.grey}
+  foreground = ${colors.lightGrey}
+  line-size = 2
   border-size = 0
   padding-left = 2
   padding-right = 2
   module-margin-left = 2
   module-margin-right = 2
-  font-0 = fixed:pixelsize=10;1
-  font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-  font-2 = siji:pixelsize=10;1
+  font-0 = "FontAwesome:pixelsize=12;4"
+  font-1 = fixed:pixelsize=10
+  font-2 = unifont:fontformat=truetype:size=8:antialias=false
+  font-3 = siji:pixelsize=10
   modules-left = bspwm
   modules-center = mpd
   tray-position = right
+  tray-detached = false
   tray-padding = 2
-  tray-background = #0063ff
+  tray-background = ${colors.darkGrey}
   wm-restack = bspwm
-  ;override-redirect = true
-  scroll-up = bspwm-desknext
-  scroll-down = bspwm-deskprev
 
 [bar/KOCHANSKI]
   inherit = bar/base
   monitor = ${env:MONITOR:HDMI-0}
-  modules-right = filesystem mediaFs vpn enp3s0 pkg date
+  modules-center = hamster
+  modules-right = rootFs homeFs mediaFs volume vpn pkg date
 
 [bar/QUEEG500]
   inherit = bar/base
-  modules-right = filesystem volume wlan vpn battery temperature pkg date
+  modules-right = rootFs homeFs volume wlan vpn battery temperature pkg date
 
 [bar/ARCHY]
   inherit = bar/base
   modules-center = hamster
   monitor = ${env:MONITOR:DVI-I-1}
-  modules-right = filesystem volume eth1 vpn pkg date
+  modules-right = filesystem volume vpn pkg date
 
 [module/pkg]
   type = custom/script
   interval = 1200
   format = <label>
-  format-underline = #dc322f
+  format-underline = ${colors.orange}
   label = "%output:0:60%"
   exec = ~/.config/polybar/pkg.sh
   exec-if = "ping -q -w 2 -c 1 176.34.135.167 > /dev/null"
 
-[module/filesystem]
+[module/rootFs]
   type = internal/fs
   interval = 25
 
   mount-0 = /
-  mount-1 = /home
 
-  label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
-  label-unmounted = %mountpoint% not mounted
-  label-unmounted-foreground = ${colors.foreground-alt}
+  label-mounted = %{F#0a81f5}%{F-} %percentage_used%%
+
+[module/homeFs]
+  type = internal/fs
+  interval = 25
+
+  mount-0 = /home
+
+  label-mounted = %{F#0a81f5}%{F-} %percentage_used%%
 
 [module/mediaFs]
   type = internal/fs
@@ -88,143 +92,50 @@
 
   mount-0 = /media
 
-  label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
-  label-unmounted = %mountpoint% not mounted
-  label-unmounted-foreground = ${colors.foreground-alt}
+  label-mounted = %{F#0a81f5}%{F-} %percentage_used%%
 
 [module/bspwm]
   type = internal/bspwm
 
   pin-workspaces = false
   enable-scroll = false
+  enable-click = false
 
   label-focused = %index%
-  label-focused-background = ${colors.background-alt}
-  label-focused-underline= ${colors.primary}
-  label-focused-padding = 2
+  label-focused-background = ${colors.darkGrey}
+  label-focused-foreground = ${colors.orange}
+  label-focused-padding = 1
 
-  label-occupied = %index%
-  label-occupied-padding = 2
-
-  label-urgent = %index%!
-  label-urgent-background = ${colors.alert}
-  label-urgent-padding = 2
+  label-urgent = %index%
+  label-urgent-background = ${colors.red}
+  label-urgent-foreground = ${colors.white}
+  label-urgent-padding = 1
 
   label-empty = %index%
-  label-empty-foreground = ${colors.foreground-alt}
-  label-empty-padding = 2
+  label-empty-background = ${colors.darkGrey}
+  label-empty-foreground = ${colors.grey}
+  label-empty-padding = 1
 
-[module/mpd]
-  type = internal/mpd
-  format-online = <label-song>  (<label-time>)
-
-  icon-prev = <
-  icon-stop = ■
-  icon-play = ▶
-  icon-pause = ||
-  icon-next = >
-
-  label-song-maxlen = 35
-  label-song-ellipsis = true
-
-[module/xbacklight]
-  type = internal/xbacklight
-
-  format = <label> <bar>
-  label = BL
-
-  bar-width = 10
-  bar-indicator = |
-  bar-indicator-foreground = #ff
-  bar-indicator-font = 2
-  bar-fill = ─
-  bar-fill-font = 2
-  bar-fill-foreground = #9f78e1
-  bar-empty = ─
-  bar-empty-font = 2
-  bar-empty-foreground = ${colors.foreground-alt}
-
-[module/backlight-acpi]
-  inherit = module/xbacklight
-  type = internal/backlight
-  card = intel_backlight
-
-[module/cpu]
-  type = internal/cpu
-  interval = 2
-  format-prefix = " "
-  format-prefix-foreground = ${colors.foreground-alt}
-  format-underline = #f90000
-  label = %percentage%%
-
-[module/memory]
-  type = internal/memory
-  interval = 2
-  format-prefix = " "
-  format-prefix-foreground = ${colors.foreground-alt}
-  format-underline = #4bffdc
-  label = %percentage_used%%
+  label-occupied = %index%
+  label-occupied-background = ${colors.darkGrey}
+  label-occupied-foreground = ${colors.white}
+  label-occupied-padding = 1
 
 [module/wlan]
   type = internal/network
   interface = wlp2s0
   interval = 3.0
 
-  format-connected = <ramp-signal> <label-connected>
-  format-connected-underline = #9f78e1
+  format-connected = %{F#0a81f5}%{F-} <label-connected>
+  format-disconnected = %{F#0a81f5}%{F-} Disconnected
   label-connected = %essid%
-
-  format-disconnected =
-  ;format-disconnected = <label-disconnected>
-  ;format-disconnected-underline = ${self.format-connected-underline}
-  ;label-disconnected = %ifname% disconnected
-  ;label-disconnected-foreground = ${colors.foreground-alt}
-
-  ramp-signal-0 = 
-  ramp-signal-1 = 
-  ramp-signal-2 = 
-  ramp-signal-3 = 
-  ramp-signal-4 = 
-  ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/vpn]
   type = custom/script
   exec = pgrep openvpn
   interval = 5
-  label = ⚩
-  format-underline = #55aa55
-
-[module/enp3s0]
-  type = internal/network
-  interface = enp3s0
-  interval = 3.0
-
-  format-connected-underline = #55aa55
-  format-connected-prefix = " "
-  format-connected-prefix-foreground = ${colors.foreground-alt}
-  label-connected = %local_ip%
-
-  format-disconnected =
-  ;format-disconnected = <label-disconnected>
-  ;format-disconnected-underline = ${self.format-connected-underline}
-  ;label-disconnected = %ifname% disconnected
-  ;label-disconnected-foreground = ${colors.foreground-alt}
-
-[module/eth1]
-  type = internal/network
-  interface = eth1
-  interval = 3.0
-
-  format-connected-underline = #55aa55
-  format-connected-prefix = " "
-  format-connected-prefix-foreground = ${colors.foreground-alt}
-  label-connected = %local_ip%
-
-  format-disconnected =
-  ;format-disconnected = <label-disconnected>
-  ;format-disconnected-underline = ${self.format-connected-underline}
-  ;label-disconnected = %ifname% disconnected
-  ;label-disconnected-foreground = ${colors.foreground-alt}
+  label = %{F#0a81f5}%{F-}
+  format-underline = ${colors.green}
 
 [module/date]
   type = internal/date
@@ -233,38 +144,23 @@
   date =
   time = %H:%M
 
-  format-prefix = 
-  format-prefix-foreground = ${colors.foreground-alt}
+  format-prefix = %{F#0a81f5}%{F-}
+  format-prefix-foreground = ${colors.lightGrey}
 
   label = %date% %time%
 
 [module/volume]
   type = internal/volume
 
-  format-volume = <label-volume> <bar-volume>
-  label-volume = VOL
-  label-volume-foreground = ${root.foreground}
-
-  format-muted-prefix = " "
-  format-muted-foreground = ${colors.foreground-alt}
-  label-muted = sound muted
-
-  bar-volume-width = 10
-  bar-volume-foreground-0 = #55aa55
-  bar-volume-foreground-1 = #55aa55
-  bar-volume-foreground-2 = #55aa55
-  bar-volume-foreground-3 = #55aa55
-  bar-volume-foreground-4 = #55aa55
-  bar-volume-foreground-5 = #f5a70a
-  bar-volume-foreground-6 = #ff5555
-  bar-volume-gradient = false
-  bar-volume-indicator = |
-  bar-volume-indicator-font = 2
-  bar-volume-fill = ─
-  bar-volume-fill-font = 2
-  bar-volume-empty = ─
-  bar-volume-empty-font = 2
-  bar-volume-empty-foreground = ${colors.foreground-alt}
+  format-volume = <ramp-volume> <label-volume>
+  ramp-volume-0 = %{F#0a81f5}%{F-}
+  ramp-volume-1 = %{F#0a81f5}%{F-}
+  ramp-volume-2 = %{F#0a81f5}%{F-}
+  ramp-headphones-0 = %{F#0a81f5}%{F-}
+  ramp-headphones-1 = %{F#0a81f5}%{F-}
+  label-muted = %{F#0a81f5}%{F-} muted
+  label-volume-foreground = ${colors.lightGrey}
+  format-muted-foreground = ${colors.lightGrey}
 
 [module/battery]
   type = internal/battery
@@ -273,24 +169,28 @@
   full-at = 98
 
   format-charging = <animation-charging> <label-charging>
-  format-charging-underline = #ffb52a
+  format-charging-underline = ${colors.orange}
 
   format-discharging = <ramp-capacity> <label-discharging>
-  format-discharging-underline = ${self.format-charging-underline}
+  format-discharging-underline = ${colors.orange}
 
-  format-full-prefix = " "
-  format-full-prefix-foreground = ${colors.foreground-alt}
-  format-full-underline = ${self.format-charging-underline}
+  format-full-prefix = 
+  format-full-prefix-foreground = ${colors.orange}
+  format-full-underline = ${colors.orange}
 
-  ramp-capacity-0 = 
-  ramp-capacity-1 = 
-  ramp-capacity-2 = 
-  ramp-capacity-foreground = ${colors.foreground-alt}
+  ramp-capacity-0 = 
+  ramp-capacity-1 = 
+  ramp-capacity-2 = 
+  ramp-capacity-3 = 
+  ramp-capacity-4 = 
+  ramp-capacity-foreground = ${colors.orange}
 
-  animation-charging-0 = 
-  animation-charging-1 = 
-  animation-charging-2 = 
-  animation-charging-foreground = ${colors.foreground-alt}
+  animation-charging-0 = 
+  animation-charging-1 = 
+  animation-charging-2 = 
+  animation-charging-3 = 
+  animation-charging-4 = 
+  animation-charging-foreground = ${colors.orange}
   animation-charging-framerate = 750
 
 [module/temperature]
@@ -299,54 +199,28 @@
   warn-temperature = 60
 
   format = <ramp> <label>
-  format-underline = #f50a4d
   format-warn = <ramp> <label-warn>
-  format-warn-underline = ${self.format-underline}
+  format-warn-underline = ${colors.red}
 
   label = %temperature%
   label-warn = %temperature%
-  label-warn-foreground = ${colors.secondary}
+  label-warn-foreground = ${colors.red}
 
-  ramp-0 = 
-  ramp-1 = 
-  ramp-2 = 
-  ramp-foreground = ${colors.foreground-alt}
-
-[module/powermenu]
-  type = custom/menu
-
-  format-spacing = 1
-
-  label-open = 
-  label-open-foreground = ${colors.secondary}
-  label-close =  cancel
-  label-close-foreground = ${colors.secondary}
-  label-separator = |
-  label-separator-foreground = ${colors.foreground-alt}
-
-  menu-0-0 = reboot
-  menu-0-0-exec = menu-open-1
-  menu-0-1 = power off
-  menu-0-1-exec = menu-open-2
-
-  menu-1-0 = cancel
-  menu-1-0-exec = menu-open-0
-  menu-1-1 = reboot
-  menu-1-1-exec = sudo reboot
-
-  menu-2-0 = power off
-  menu-2-0-exec = sudo poweroff
-  menu-2-1 = cancel
-  menu-2-1-exec = menu-open-0
+  ramp-0 = 
+  ramp-1 = 
+  ramp-2 = 
+  ramp-foreground = ${colors.orange}
 
 [module/hamster]
   type = custom/script
-  interval = 2
+  interval = 10
 
   exec = ~/.config/polybar/hamster.sh
 
-  format-prefix = " "
-  format-prefix-foreground = ${colors.foreground-alt}
-  format-close-foreground = ${colors.foreground}
+  format-prefix = "%{F#0a81f5}%{F-} "
+  format-prefix-foreground = ${colors.orange}
+  format-close-foreground = ${colors.red}
+
+  click-left = hamster
 
 ; vim:ft=dosini
