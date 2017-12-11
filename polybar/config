@@ -215,11 +215,12 @@
   interval = 10
 
   exec = ~/.config/polybar/hamster.sh
+  exec-if = hamster current | grep -q -E -v '^No activity$'
 
   format-prefix = " %{F#0a81f5}%{F-} "
   format-prefix-foreground = ${colors.orange}
   format-close-foreground = ${colors.red}
 
-  click-left = hamster
+  click-left = "hamster &"
 
 ; vim:ft=dosini

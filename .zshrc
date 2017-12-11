@@ -22,6 +22,7 @@ export EDITOR="/usr/bin/nvim"
 export BROWSER="/usr/bin/google-chrome-stable"
 export GOPATH="$HOME/go"
 export FZF_DEFAULT_OPTS="--reverse --ansi --multi"
+export HISTORY_IGNORE="(ls*|cd*|pwd*|exit*|[ \t]*)"
 
 # key bindings
 bindkey "\e[1~" beginning-of-line
@@ -87,7 +88,7 @@ PS1="[%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m%{$reset_color%}] %{$fg_no_b
 RPS1='${vcs_info_msg_0_}'
 
 function minikube {
-  if [ ! "$(kubectl config current-context)" == 'demo.ccl-flo.com' ]; then
+  if [ "$(kubectl config current-context)" == 'minikube' ]; then
     /usr/bin/minikube $@
   else
     echo "Kubectl context is not minikube. Refusing to work"
