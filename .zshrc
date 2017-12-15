@@ -87,11 +87,17 @@ setopt prompt_subst
 PS1="[%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m%{$reset_color%}] %{$fg_no_bold[yellow]%}%~%{$reset_color%}%\\$ "
 RPS1='${vcs_info_msg_0_}'
 
+function gitdc {
+  local sha=`gitc`
+  git diff "$sha^" "$sha"
+}
+
 function minikube {
   if [ "$(kubectl config current-context)" == 'minikube' ]; then
     /usr/bin/minikube $@
   else
     echo "Kubectl context is not minikube. Refusing to work"
+    return 1
   fi
 }
 
