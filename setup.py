@@ -51,6 +51,7 @@ configs = [
     ]),
     ("$HOME/.config/sxhkd", ["./bspwm/sxhkdrc"]),
     ("$HOME/.config/bspwm", ["./bspwm/bspwmrc"]),
+    ("$HOME/.config/Code", ["./vscode/User"]),
     ("$HOME/.config", ["./rofi"]),
     ("$HOME/.ncmpcpp", [("./ncmpcpp", "config")]),
     ("$HOME", [

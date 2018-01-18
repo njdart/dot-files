@@ -1,0 +1,52 @@
+{
+    "editor.tabSize": 4,
+    "editor.renderWhitespace": "boundary",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "workbench.startupEditor": "newUntitledFile",
+    "explorer.confirmDragAndDrop": false,
+    "window.zoomLevel": 0,
+    "extensions.ignoreRecommendations": false,
+    "files.autoSave": "onFocusChange",
+    "files.trimTrailingWhitespace": true,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true
+    },
+    "files.associations": {
+        "*.gyp": "json"
+    },
+    "git.autofetch": true,
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "prettier.eslintIntegration": true,
+    "prettier.tabWidth": 4,
+    "eslint.nodePath": "/home/nic/.nvm/versions/node/v4.8.4/lib/node_modules",
+    "eslint.run": "onType",
+    "todohighlight.isCaseSensitive": false,
+    "todohighlight.keywordsPattern": "(TODO|FIXME|HACK|FIX ME):?",
+    "C_Cpp.intelliSenseEngine": "Default",
+    "markdown.styles": [
+        "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.9.0/github-markdown.css"
+    ],
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": false,
+        "suppressCommitNotFoundWarning": false,
+        "suppressFileNotUnderSourceControlWarning": false,
+        "suppressGitVersionWarning": false,
+        "suppressLineUncommittedWarning": false,
+        "suppressNoRepositoryWarning": false,
+        "suppressUpdateNotice": false,
+        "suppressWelcomeNotice": true
+    },
+    "go.testFlags": [
+        "-v"
+    ]
+}
