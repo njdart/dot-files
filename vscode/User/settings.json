@@ -48,5 +48,6 @@
     },
     "go.testFlags": [
         "-v"
-    ]
+    ],
+    "gitlens.advanced.telemetry.enabled": false
 }

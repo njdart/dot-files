@@ -14,15 +14,16 @@ autoload -U colors
 colors
 compinit
 
-export PATH=$HOME/bin:/.gem/ruby/2.3.0/bin:$HOME/.local/bin:$HOME/.cabal/bin:$PATH
-
 export TERM=xterm
 export COLORTERM=terminator
 export EDITOR="/usr/bin/nvim"
 export BROWSER="/usr/bin/google-chrome-stable"
 export GOPATH="$HOME/go"
+export GOBIN="$HOME/go/bin"
 export FZF_DEFAULT_OPTS="--reverse --ansi --multi"
 export HISTORY_IGNORE="(ls*|cd*|pwd*|exit*|[ \t]*)"
+
+export PATH=$HOME/bin:/.gem/ruby/2.3.0/bin:$HOME/.local/bin:$HOME/.cabal/bin:$PATH:$GOBIN
 
 # key bindings
 bindkey "\e[1~" beginning-of-line
@@ -61,6 +62,7 @@ alias diff='diff --color=always'
 
 # Git Alias
 alias gitc='git log --color=always --format="%C(auto)%h %<(15,trunc)%an %s %C(black)%C(bold)%cr %C(auto)%d" | fzf | awk '"'"'{print $1}'"'"
+alias gitvc='git diff `gitc`^!'
 alias gitt="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
 
 [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

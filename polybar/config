@@ -57,8 +57,8 @@
 [bar/ARCHY]
   inherit = bar/base
   modules-center = hamster
-  monitor = ${env:MONITOR:DVI-I-1}
-  modules-right = rootFs homeFs volume vpn pkg date
+  monitor = ${env:MONITOR:VGA-1}
+  modules-right = rootFs homeFs optFs volume vpn pkg date
 
 [module/pkg]
   type = custom/script
@@ -92,6 +92,14 @@
   mount-0 = /media
 
   label-mounted = %{F#0a81f5}%{F-} %percentage_used%%
+
+[module/optFs]
+  type = internal/fs
+  interval = 25
+
+  mount-0 = /opt
+
+  label-mounted = %{F#0a81f5}%{F-} %percentage_used%%
 
 [module/bspwm]
   type = internal/bspwm
