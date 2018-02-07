@@ -35,14 +35,8 @@ case $HOSTNAME in
     xbindkeys
     ;;
   "ARCHY")
-    xrandr --output DVI-I-1 \
-               --mode 1920x1080 \
-               --pos 0x0 \
-               --rotate left \
-           --output VGA-1 \
-               --mode 1920x1080 \
-               --pos 1080x220 \
-               --primary
+    xrandr --output DVI-I-1 --mode 1920x1080 --pos 0x0      --rotate left \
+           --output VGA-1   --mode 1920x1080 --pos 1080x220 --rotate normal --primary
 
     bspc monitor VGA-1 -n primary
     bspc monitor DVI-I-1 -n secondary
