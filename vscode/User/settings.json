@@ -21,7 +21,8 @@
         "**/.DS_Store": true
     },
     "files.associations": {
-        "*.gyp": "json"
+        "*.gyp": "json",
+        "*.cnf": "ini"
     },
     "git.autofetch": true,
     "telemetry.enableTelemetry": false,
@@ -49,5 +50,13 @@
     "go.testFlags": [
         "-v"
     ],
-    "gitlens.advanced.telemetry.enabled": false
+    "gitlens.advanced.telemetry.enabled": false,
+    "[go]": {
+        "editor.insertSpaces": false,
+        "editor.formatOnSave": false
+    },
+    "prettier.disableLanguages": [
+        "vue",
+        "json"
+    ]
 }

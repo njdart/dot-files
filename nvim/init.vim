@@ -14,3 +14,4 @@ set undofile
 set undodir=~/.nvim/undodir
 
 set ignorecase
+

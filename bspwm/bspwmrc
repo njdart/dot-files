@@ -43,6 +43,7 @@ case $HOSTNAME in
 
     bspc monitor secondary -d I II III
     bspc monitor primary -d IV V VI VII VIII IX X
+
     bspc config -m secondary top_padding 5
     bspc config -m secondary bottom_padding 5
     ;;

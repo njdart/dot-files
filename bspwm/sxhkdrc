@@ -6,13 +6,13 @@
 super + shift + q
   bspc quit
 
-# C for close, shift+C for KILL!
+# Close
 super + shift + c
   bspc node -c
 
-## alternate between the tiled and monocle layout
-#super + t
-#  bspc desktop -l next
+# lock
+super + l
+  dm-tool lock
 
 # Tile, Floating-Tile, Floating, Fullscreen
 super + {t,shift + t,s,f}
