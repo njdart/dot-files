@@ -11,7 +11,7 @@ super + shift + c
   bspc node -c
 
 # lock
-super + l
+super + shift + w
   dm-tool lock
 
 # Tile, Floating-Tile, Floating, Fullscreen

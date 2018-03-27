@@ -58,5 +58,6 @@
     "prettier.disableLanguages": [
         "vue",
         "json"
-    ]
+    ],
+    "gitlens.keymap": "alternate"
 }
