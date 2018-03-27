@@ -102,11 +102,23 @@ for config in configs:
 
     # Get the destination location and expand it, then create it if it doesn't exist
     destination = os.path.expandvars(config[0])
-    if not os.path.exists(destination):
-      os.makedirs(destination)
-      # Chown if nessecary
-      if sudo_user:
-          os.chown(destination, sudo_user_uid, sudo_user_gid)
+
+    print("Working on directory {}".format(destination))
+
+    try:
+        if not os.path.exists(destination):
+            os.makedirs(destination)
+            # Chown if nessecary
+            if sudo_user:
+                os.chown(destination, sudo_user_uid, sudo_user_gid)
+    except OSError as e:
+        if e.errno == 13:
+            print(ERRORCOLOUR, end='')
+            print("  => ERROR: Permission denied to make directory {}".format(destination))
+            print(NOCOLOUR, end='')
+        else :
+            print(e)
+        continue
 
     sources = []
 
@@ -142,8 +154,6 @@ for config in configs:
     test = lambda x: True
     if len(config) == 3:
         test = config[2]
-
-    print("Working on directory {}".format(destination))
 
     try:
 
