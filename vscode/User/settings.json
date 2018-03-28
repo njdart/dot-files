@@ -22,7 +22,8 @@
     },
     "files.associations": {
         "*.gyp": "json",
-        "*.cnf": "ini"
+        "*.cnf": "ini",
+        "Vagrantfile": "ruby"
     },
     "git.autofetch": true,
     "telemetry.enableTelemetry": false,
