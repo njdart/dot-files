@@ -23,10 +23,10 @@ NOCOLOUR = "\033[0m"
 #           "file2",
 #           "*file_with_glob_*"
 #           ("file3", "destinationName")
-#       ]
+#       ],
 #       lambda file: False  # Optional test to perform. Returning anything other than true will prevent linking.
 #                           # Anything other than false will be given as a reason for skipping
-#   ]
+#   )
 configs = [
     ("/etc/X11/xorg.conf.d", [
         "./xorg/*"
@@ -190,7 +190,7 @@ for config in configs:
                     print(ERRORCOLOUR, end='')
                     print("  => File {} exists, ignoring".format(fullDestinationPath))
                     print(NOCOLOUR, end='')
-                    continue;
+                    continue
 
                 else:
                     print("  => Symlinking {} to {}".format(source, fullDestinationPath))
@@ -217,3 +217,5 @@ print()
 print("Also Run:")
 print()
 print(" # git config --global core.excludesfile ~/.config/gitignore_global")
+print()
+print(" # bash ./vscode/extensions")

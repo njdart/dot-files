@@ -1,0 +1,13 @@
+code --install-extension EditorConfig.EditorConfig
+code --install-extension PeterJausovec.vscode-docker
+code --install-extension christian-kohler.npm-intellisense
+code --install-extension dbaeumer.vscode-eslint
+code --install-extension eamodio.gitlens
+code --install-extension esbenp.prettier-vscode
+code --install-extension kumar-harsh.graphql-for-vscode
+code --install-extension lukehoban.Go
+code --install-extension mauve.terraform
+code --install-extension ms-python.python
+code --install-extension ms-vscode.cpptools
+code --install-extension stevencl.addDocComments
+code --install-extension wayou.vscode-todo-highlight
