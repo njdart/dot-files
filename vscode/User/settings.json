@@ -62,5 +62,6 @@
         "vue",
         "json"
     ],
-    "gitlens.keymap": "chorded"
+    "gitlens.keymap": "chorded",
+    "gitlens.historyExplorer.enabled": true
 }

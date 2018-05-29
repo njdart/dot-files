@@ -34,12 +34,13 @@ configs = [
     ("/etc", [
         ("./mpd.conf.KOCHANSKI", "mpd.conf")
     ],
-    lambda x: socket.gethostname() == "KOCHANSKI" or "Only for Kochanski"),
+        lambda x: socket.gethostname() == "KOCHANSKI" or "Only for Kochanski"),
     ("/etc", [
         ("./mpd.conf.QUEEG500", "mpd.conf")
     ],
-    lambda x: socket.gethostname() == "QUEEG500" or "Only for QUEEG500"),
-    ("/etc", ["./mpd.conf"], lambda x: socket.gethostname() == "KOCHANSKI" or "Only for Kochanski"),
+        lambda x: socket.gethostname() == "QUEEG500" or "Only for QUEEG500"),
+    ("/etc", ["./mpd.conf"], lambda x: socket.gethostname()
+     == "KOCHANSKI" or "Only for Kochanski"),
     ("$HOME", [
         "./bin"
     ]),
@@ -51,6 +52,7 @@ configs = [
     ]),
     ("$HOME/.config/sxhkd", ["./bspwm/sxhkdrc"]),
     ("$HOME/.config/bspwm", ["./bspwm/bspwmrc"]),
+    ("$HOME/.config/", ["./dunst"]),
     ("$HOME/.config/Code", ["./vscode/User"]),
     ("$HOME/.config", ["./rofi"]),
     ("$HOME/.ncmpcpp", [("./ncmpcpp", "config")]),
@@ -58,14 +60,15 @@ configs = [
         "./.xprofile",
         "./.zshrc"
     ]),
-    ("$HOME", ["./.xbindkeysrc"], lambda x: socket.gethostname() == "QUEEG500" or "Only for QUEEG500"),
+    ("$HOME", ["./.xbindkeysrc"], lambda x: socket.gethostname()
+     == "QUEEG500" or "Only for QUEEG500"),
     ("$HOME/.config", [
         "./polybar"
     ]),
     ("$HOME/.config/sublime-text-3/Packages/User", [
         "./sublime/*"
     ]),
-    ("$HOME/screenshots", []), # this is only to satisfy the scrot alias in .zshrc
+    ("$HOME/screenshots", []),  # this is only to satisfy the scrot alias in .zshrc
 ]
 
 # First, check for sudo
@@ -76,13 +79,14 @@ if "SUDO_USER" in os.environ:
     sudo_user = os.environ['SUDO_USER']
     sudo_user_uid = pwd.getpwnam(sudo_user).pw_uid
     sudo_user_gid = grp.getgrnam(sudo_user).gr_gid
-    print("Running as Root, Detected sudoer as {} (UID {}, GID {})".format(sudo_user, sudo_user_uid, sudo_user_gid))
+    print("Running as Root, Detected sudoer as {} (UID {}, GID {})".format(
+        sudo_user, sudo_user_uid, sudo_user_gid))
 
     oldHome = os.environ["HOME"]
     newHome = os.path.expanduser("~" + sudo_user)
 
     print("Continuing will change your home directory from {} to {} and chown to {}"
-        .format(oldHome, newHome, sudo_user))
+          .format(oldHome, newHome, sudo_user))
 
     answer = input("Continue? Or Run for [r]oot? (N/y/r) ").lower() or 'n'
 
@@ -114,9 +118,10 @@ for config in configs:
     except OSError as e:
         if e.errno == 13:
             print(ERRORCOLOUR, end='')
-            print("  => ERROR: Permission denied to make directory {}".format(destination))
+            print("  => ERROR: Permission denied to make directory {}".format(
+                destination))
             print(NOCOLOUR, end='')
-        else :
+        else:
             print(e)
         continue
 
@@ -140,7 +145,7 @@ for config in configs:
             print(ERRORCOLOUR, end='')
             print("  => Cannot use renames with GLOB that matches more than one file")
             print("     Source {} matched with {}. Renaming to {} is not possible"
-                .format(source, expandedGlobs, rename))
+                  .format(source, expandedGlobs, rename))
             print(NOCOLOUR, end='')
             continue
 
@@ -151,7 +156,7 @@ for config in configs:
             sources.append((absPath, rename or name))
 
     # Allow tests to be performed on each file, if no test is provided, set a default one
-    test = lambda x: True
+    def test(x): return True
     if len(config) == 3:
         test = config[2]
 
@@ -163,7 +168,7 @@ for config in configs:
             if testResult != True:
                 print(WARNINGCOLOUR, end='')
                 print("  => Skipping Source file {} {}"
-                    .format(source, (" Reason: " + testResult if testResult else "")))
+                      .format(source, (" Reason: " + testResult if testResult else "")))
                 print(NOCOLOUR, end='')
                 continue
 
@@ -181,26 +186,28 @@ for config in configs:
                 if os.path.islink(fullDestinationPath):
                     print(WARNINGCOLOUR, end='')
                     print("  => Link {} exists, linking to {}, replacing"
-                        .format(fullDestinationPath, os.path.realpath(fullDestinationPath)))
+                          .format(fullDestinationPath, os.path.realpath(fullDestinationPath)))
                     print(NOCOLOUR, end='')
                     os.unlink(fullDestinationPath)
                     os.symlink(source, fullDestinationPath)
 
                 elif os.path.isfile(fullDestinationPath):
                     print(ERRORCOLOUR, end='')
-                    print("  => File {} exists, ignoring".format(fullDestinationPath))
+                    print("  => File {} exists, ignoring".format(
+                        fullDestinationPath))
                     print(NOCOLOUR, end='')
                     continue
 
                 else:
-                    print("  => Symlinking {} to {}".format(source, fullDestinationPath))
+                    print("  => Symlinking {} to {}".format(
+                        source, fullDestinationPath))
                     os.symlink(source, fullDestinationPath)
 
             except OSError as e:
                 if e.errno == 13:
                     print(ERRORCOLOUR, end='')
                     print(ERRORCOLOUR + "    => ERROR: Permission denied to symlink {} to {}"
-                        .format(source, fullDestinationPath))
+                          .format(source, fullDestinationPath))
                     print(NOCOLOUR, end='')
                 else:
                     print(e)
@@ -208,9 +215,10 @@ for config in configs:
     except OSError as e:
         if e.errno == 13:
             print(ERRORCOLOUR, end='')
-            print("  => ERROR: Permission denied to make directory {}".format(destination))
+            print("  => ERROR: Permission denied to make directory {}".format(
+                destination))
             print(NOCOLOUR, end='')
-        else :
+        else:
             print(e)
 
 print()
