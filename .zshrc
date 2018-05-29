@@ -93,3 +93,7 @@ function minikube {
 function precmd {
   vcs_info
 }
+
+function du-sorted () {
+    paste -d '#' <( du -s $@ ) <( du -hs $@ ) | sort -n -k1,7 | cut -d '#' -f 2
+}
