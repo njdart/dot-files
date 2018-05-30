@@ -1,8 +1,8 @@
 {
     "editor.tabSize": 4,
     "editor.renderWhitespace": "boundary",
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": true,
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": false,
     "editor.rulers": [
         80,
         120
@@ -30,7 +30,7 @@
     "telemetry.enableCrashReporter": false,
     "prettier.eslintIntegration": true,
     "prettier.tabWidth": 4,
-    "eslint.nodePath": "/home/nic/.nvm/versions/node/v4.8.4/lib/node_modules",
+    "eslint.nodePath": "/home/nic/.nvm/versions/node/v8.11.1/lib/node_modules",
     "eslint.run": "onType",
     "todohighlight.isCaseSensitive": false,
     "todohighlight.keywordsPattern": "(TODO|FIXME|HACK|FIX ME):?",
