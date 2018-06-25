@@ -10,7 +10,6 @@ setopt appendhistory autocd extendedglob HIST_IGNORE_DUPS
 [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [ -f /usr/share/doc/pkgfile/command-not-found.zsh ] && source /usr/share/doc/pkgfile/command-not-found.zsh
 [ -f /etc/profile.d/fzf.zsh ] && source /etc/profile.d/fzf.zsh
-[ -f $HOME/.config/`hostname`.zshrc ] && source $HOME/.config/`hostname`.zshrc
 [ -f /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
 
 autoload -Uz compinit compdef
@@ -36,6 +35,7 @@ export GOBIN="$HOME/go/bin"
 export FZF_DEFAULT_OPTS="--reverse --ansi --multi"
 export HISTORY_IGNORE="(ls*|cd*|pwd*|exit*|[ \t]*)"
 export PATH=$HOME/bin:/.gem/ruby/2.3.0/bin:$HOME/.local/bin:$HOME/.cabal/bin:$PATH:$GOBIN
+export PASSWORD_STORE_GENERATED_LENGTH=32
 
 # key bindings
 #bindkey -e
@@ -95,5 +95,7 @@ function precmd {
 }
 
 function du-sorted () {
-    paste -d '#' <( du -s $@ ) <( du -hs $@ ) | sort -n -k1,7 | cut -d '#' -f 2
+    paste -d '#' <( du -s "$@" ) <( du -hs "$@" ) | sort -n -k1,7 | cut -d '#' -f 2
 }
+
+source <(helm completion zsh)
