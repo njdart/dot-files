@@ -35,7 +35,7 @@ export GOPATH="$HOME/go"
 export GOBIN="$HOME/go/bin"
 export FZF_DEFAULT_OPTS="--reverse --ansi --multi"
 export HISTORY_IGNORE="(ls*|cd*|pwd*|exit*|[ \t]*)"
-export PATH=$HOME/bin:/.gem/ruby/2.3.0/bin:$HOME/.local/bin:$HOME/.cabal/bin:$PATH:$GOBIN
+export PATH=$HOME/bin:/.gem/ruby/2.3.0/bin:$HOME/.local/bin:$HOME/.cabal/bin:$GOBIN:$PATH
 
 # key bindings
 #bindkey -e
