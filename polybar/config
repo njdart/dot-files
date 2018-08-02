@@ -48,11 +48,11 @@
   inherit = bar/base
   monitor = ${env:MONITOR:HDMI-0}
   modules-center = hamster
-  modules-right = rootFs homeFs mediaFs volume pkg date
+  modules-right = rootFs homeFs mediaFs volume vpn date
 
 [bar/QUEEG500]
   inherit = bar/base
-  modules-right = rootFs homeFs volume wlan battery temperature pkg date
+  modules-right = rootFs homeFs volume wlan vpn battery temperature date
 
 [bar/ARCHY]
   inherit = bar/base
