@@ -48,26 +48,17 @@
   inherit = bar/base
   monitor = ${env:MONITOR:HDMI-0}
   modules-center = hamster
-  modules-right = rootFs homeFs mediaFs volume vpn pkg date
+  modules-right = rootFs homeFs mediaFs volume pkg date
 
 [bar/QUEEG500]
   inherit = bar/base
-  modules-right = rootFs homeFs volume wlan vpn battery temperature pkg date
+  modules-right = rootFs homeFs volume wlan battery temperature pkg date
 
 [bar/ARCHY]
   inherit = bar/base
   modules-center = hamster
   monitor = ${env:MONITOR:VGA-1}
-  modules-right = rootFs homeFs optFs volume vpn pkg date
-
-[module/pkg]
-  type = custom/script
-  interval = 1200
-  format = <label>
-  format-underline = ${colors.orange}
-  label = "%output:0:60%"
-  exec = ~/.config/polybar/pkg.sh
-  exec-if = "ping -q -w 2 -c 1 176.34.135.167 > /dev/null"
+  modules-right = rootFs homeFs optFs volume vpn date
 
 [module/rootFs]
   type = internal/fs
