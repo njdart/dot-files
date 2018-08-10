@@ -25,7 +25,7 @@
         "*.cnf": "ini",
         "Vagrantfile": "ruby"
     },
-    "git.autofetch": true,
+    "git.autofetch": false,
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
     "prettier.eslintIntegration": true,
@@ -63,5 +63,7 @@
         "json"
     ],
     "gitlens.keymap": "chorded",
-    "gitlens.historyExplorer.enabled": true
+    "gitlens.historyExplorer.enabled": true,
+    "cSpell.language": "en-GB",
+
 }
