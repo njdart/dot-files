@@ -98,4 +98,5 @@ function du-sorted () {
     paste -d '#' <( du -s "$@" ) <( du -hs "$@" ) | sort -n -k1,7 | cut -d '#' -f 2
 }
 
-source <(helm completion zsh)
+[ -f ~/.config/`hostname`.zshrc ] && source ~/.config/`hostname`.zshrc
+
