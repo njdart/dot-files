@@ -9,7 +9,6 @@ setopt appendhistory autocd extendedglob HIST_IGNORE_DUPS
 # Source external dependencies
 [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [ -f /usr/share/doc/pkgfile/command-not-found.zsh ] && source /usr/share/doc/pkgfile/command-not-found.zsh
-[ -f /etc/profile.d/fzf.zsh ] && source /etc/profile.d/fzf.zsh
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
@@ -34,7 +33,10 @@ export EDITOR="/usr/bin/nvim"
 export BROWSER="/usr/bin/google-chrome-stable"
 export GOPATH="$HOME/go"
 export GOBIN="$HOME/go/bin"
-export FZF_DEFAULT_OPTS="--reverse --ansi --multi"
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules,*.swp,dist,*.coffee}/*" 2> /dev/null'
+export FZF_ALT_C_COMMAND="bfs -type d -nohidden"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS='--reverse --ansi --multi'
 export HISTORY_IGNORE="(ls*|cd*|pwd*|exit*|[ \t]*)"
 export PATH=$HOME/bin:/.gem/ruby/2.3.0/bin:$HOME/.local/bin:$HOME/.cabal/bin:$GOBIN:$PATH
 export PASSWORD_STORE_GENERATED_LENGTH=32

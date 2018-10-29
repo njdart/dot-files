@@ -148,7 +148,7 @@
   label = %date% %time%
 
 [module/volume]
-  type = internal/volume
+  type = internal/pulseaudio
 
   format-volume = <ramp-volume> <label-volume>
   ramp-volume-0 = %{F#0a81f5}%{F-}

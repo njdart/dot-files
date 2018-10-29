@@ -65,5 +65,7 @@
     "gitlens.keymap": "chorded",
     "gitlens.historyExplorer.enabled": true,
     "cSpell.language": "en-GB",
-
+    "breadcrumbs.enabled": true,
+    "diffEditor.ignoreTrimWhitespace": true,
+    "diffEditor.renderSideBySide": false,
 }

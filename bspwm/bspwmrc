@@ -9,8 +9,6 @@ bspc config gapless_monocle     true
 
 HOSTNAME=`hostname`
 
-polybar $HOSTNAME &
-
 case $HOSTNAME in
   "KOCHANSKI")
     xrandr --output DVI-I-1 --mode 1920x1080 --pos 0x0      --rotate left \
@@ -48,5 +46,7 @@ case $HOSTNAME in
     bspc config -m secondary bottom_padding 5
     ;;
 esac
+
+polybar $HOSTNAME &
 
 feh --bg-tile --no-xinerama ~/.config/background
