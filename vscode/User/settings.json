@@ -68,4 +68,5 @@
     "breadcrumbs.enabled": true,
     "diffEditor.ignoreTrimWhitespace": true,
     "diffEditor.renderSideBySide": false,
+    "search.usePCRE2": true,
 }
