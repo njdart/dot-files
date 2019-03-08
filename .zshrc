@@ -17,6 +17,7 @@ autoload -Uz compinit compdef
 autoload -Uz vcs_info
 autoload -U colors
 setopt prompt_subst
+setopt HIST_IGNORE_SPACE
 
 colors
 compinit
