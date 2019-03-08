@@ -25,7 +25,7 @@
         "*.cnf": "ini",
         "Vagrantfile": "ruby"
     },
-    "git.autofetch": false,
+    "git.autofetch": true,
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
     "prettier.eslintIntegration": true,
