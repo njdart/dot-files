@@ -58,7 +58,8 @@ configs = [
     ("$HOME/.ncmpcpp", [("./ncmpcpp", "config")]),
     ("$HOME", [
         "./.xprofile",
-        "./.zshrc"
+        "./.zshrc",
+        "./.tmux.conf"
     ]),
     ("$HOME", ["./.xbindkeysrc"], lambda x: socket.gethostname()
      == "QUEEG500" or "Only for QUEEG500"),

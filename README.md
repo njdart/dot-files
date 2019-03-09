@@ -17,6 +17,13 @@ I've tried to automate this as much as possible. Running the `setup.py` file (py
 
     ./setup.py
 
+## Pulseaudio
+
+Enable the user-speciffic unit file;
+```bash
+systemctl --user enable pulseaudio
+```
+
 ## VSCode
 
 To get a list of extensions, prefixed with the install command, run;
