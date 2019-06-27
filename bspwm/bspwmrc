@@ -33,11 +33,11 @@ case $HOSTNAME in
     xbindkeys
     ;;
   "ARCHY")
-    xrandr --output DVI-I-1 --mode 1920x1080 --pos 0x0      --rotate left \
-           --output VGA-1   --mode 1920x1080 --pos 1080x220 --rotate normal --primary
+    xrandr --output VGA-1   --mode 1920x1080 --pos 0x0      --rotate left \
+           --output DVI-I-1 --mode 1920x1080 --pos 1080x220 --rotate normal --primary
 
-    bspc monitor VGA-1 -n primary
-    bspc monitor DVI-I-1 -n secondary
+    bspc monitor DVI-I-1 -n primary
+    bspc monitor VGA-1 -n secondary
 
     bspc monitor secondary -d I II III
     bspc monitor primary -d IV V VI VII VIII IX X
@@ -46,6 +46,12 @@ case $HOSTNAME in
     bspc config -m secondary bottom_padding 5
     ;;
 esac
+
+bspc rule -a Firefox 'desktop=^2'
+bspc rule -a Google-chrome 'desktop=^3'
+bspc rule -a Code 'desktop=^4'
+bspc rule -a Virt-manager 'desktop=^9'
+bspc rule -a Slack 'desktop=^0'
 
 polybar $HOSTNAME &
 
