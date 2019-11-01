@@ -26,11 +26,13 @@ case $HOSTNAME in
 
     bspc config -m left top_padding 5
     bspc config -m left bottom_padding 5
+
+    feh --bg-tile --no-xinerama ~/.config/background
     ;;
   "QUEEG500")
     bspc monitor -d I II III IV V VI VII VIII IX X
 
-    xbindkeys
+    feh --bg-scale  --no-xinerama ~/.config/background
     ;;
   "ARCHY")
     xrandr --output VGA-1   --mode 1920x1080 --pos 0x0      --rotate left \
@@ -44,6 +46,10 @@ case $HOSTNAME in
 
     bspc config -m secondary top_padding 5
     bspc config -m secondary bottom_padding 5
+
+    feh --bg-tile --no-xinerama ~/.config/background
+    ;;
+  "*")
     ;;
 esac
 
@@ -54,7 +60,5 @@ bspc rule -a Virt-manager 'desktop=^9'
 bspc rule -a Slack 'desktop=^0'
 
 polybar $HOSTNAME &
-
-feh --bg-tile --no-xinerama ~/.config/background
 
 compton --vsync --no-fading-openclose &
