@@ -56,3 +56,5 @@ bspc rule -a Slack 'desktop=^0'
 polybar $HOSTNAME &
 
 feh --bg-tile --no-xinerama ~/.config/background
+
+compton --vsync --no-fading-openclose &

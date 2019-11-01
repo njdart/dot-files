@@ -47,7 +47,7 @@
 [bar/KOCHANSKI]
   inherit = bar/base
   monitor = ${env:MONITOR:HDMI-0}
-  modules-center = hamster
+  modules-center = player-mpv-tail
   modules-right = rootFs homeFs mediaFs volume vpn date
 
 [bar/QUEEG500]
@@ -221,5 +221,15 @@
   format-close-foreground = ${colors.red}
 
   click-left = "hamster &"
+
+[module/player-mpv-tail]
+  type = custom/script
+  exec = ~/.config/polybar/player-mpv-tail.py -t 42 -c '#abb2bf'
+  tail = true
+  click-left = ~/polybar-scripts/player-mpv-tail.py -p pause
+  click-middle = ~/polybar-scripts/player-mpv-tail.py -p playlist-pos -1
+  click-right = ~/polybar-scripts/player-mpv-tail.py -p playlist-pos +1
+  scroll-up = ~/polybar-scripts/player-mpv-tail.py -p time-pos -10
+  scroll-down = ~/polybar-scripts/player-mpv-tail.py -p time-pos +10
 
 ; vim:ft=dosini

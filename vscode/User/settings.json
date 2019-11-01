@@ -67,6 +67,6 @@
     "cSpell.language": "en-GB",
     "breadcrumbs.enabled": true,
     "diffEditor.ignoreTrimWhitespace": true,
-    "diffEditor.renderSideBySide": false,
+    "diffEditor.renderSideBySide": true,
     "search.usePCRE2": true,
 }

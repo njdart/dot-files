@@ -13,6 +13,7 @@ import grp
 
 ERRORCOLOUR = "\033[91m"
 WARNINGCOLOUR = '\033[93m'
+SUCCESS_COLOUR = '\033[32m'
 NOCOLOUR = "\033[0m"
 
 # a list of tuples as such:
@@ -28,148 +29,86 @@ NOCOLOUR = "\033[0m"
 #                           # Anything other than false will be given as a reason for skipping
 #   )
 configs = [
-    ("/etc/X11/xorg.conf.d", [
-        "./xorg/*"
-    ]),
-    ("/etc", [
-        ("./mpd.conf.KOCHANSKI", "mpd.conf")
-    ],
-        lambda x: socket.gethostname() == "KOCHANSKI" or "Only for Kochanski"),
-    ("/etc", [
-        ("./mpd.conf.QUEEG500", "mpd.conf")
-    ],
-        lambda x: socket.gethostname() == "QUEEG500" or "Only for QUEEG500"),
-    ("/etc", ["./mpd.conf"], lambda x: socket.gethostname()
-     == "KOCHANSKI" or "Only for Kochanski"),
+    # # These resources will require root privileges to link
+    # ("/etc/X11/xorg.conf.d", [
+    #     "./xorg/*"
+    # ]),
+
+    # User config
     ("$HOME", [
-        "./bin"
-    ]),
-    ("$HOME/.config", [
-        "./nvim",
-        "./terminator",
-        "./gitignore_global",
-        "./rofi"
-    ]),
-    ("$HOME/.config/sxhkd", ["./bspwm/sxhkdrc"]),
-    ("$HOME/.config/bspwm", ["./bspwm/bspwmrc"]),
-    ("$HOME/.config/", ["./dunst"]),
-    ("$HOME/.config/Code", ["./vscode/User"]),
-    ("$HOME/.config", ["./rofi"]),
-    ("$HOME/.ncmpcpp", [("./ncmpcpp", "config")]),
-    ("$HOME", [
+        "./bin",
         "./.xprofile",
         "./.zshrc",
         "./.tmux.conf"
     ]),
-    ("$HOME", ["./.xbindkeysrc"], lambda x: socket.gethostname()
-     == "QUEEG500" or "Only for QUEEG500"),
+
     ("$HOME/.config", [
+        "./nvim",
+        "./terminator",
+        "./gitignore_global",
+        "./rofi",
+        "./dunst",
         "./polybar"
     ]),
-    ("$HOME/.config/sublime-text-3/Packages/User", [
-        "./sublime/*"
-    ]),
-    ("$HOME/screenshots", []),  # this is only to satisfy the scrot alias in .zshrc
+
+    ("$HOME/.config/mpv", ["mpv.conf"]),
+    ("$HOME/.config/sxhkd", ["./bspwm/sxhkdrc"]),
+    ("$HOME/.config/bspwm", ["./bspwm/bspwmrc"]),
+    ("$HOME/.config/Code", ["./vscode/User"]),
+
+    # Create the screenshot directory for the scrot alias in .zshrc
+    ("$HOME/screenshots", []),
 ]
 
-# First, check for sudo
-sudo_user = None
-
-if "SUDO_USER" in os.environ:
-    print(WARNINGCOLOUR, end="")
-    sudo_user = os.environ['SUDO_USER']
-    sudo_user_uid = pwd.getpwnam(sudo_user).pw_uid
-    sudo_user_gid = grp.getgrnam(sudo_user).gr_gid
-    print("Running as Root, Detected sudoer as {} (UID {}, GID {})".format(
-        sudo_user, sudo_user_uid, sudo_user_gid))
-
-    oldHome = os.environ["HOME"]
-    newHome = os.path.expanduser("~" + sudo_user)
-
-    print("Continuing will change your home directory from {} to {} and chown to {}"
-          .format(oldHome, newHome, sudo_user))
-
-    answer = input("Continue? Or Run for [r]oot? (N/y/r) ").lower() or 'n'
-
-    if answer[0] == "y":
-        os.environ["HOME"] = newHome
-
-    elif answer[0] == "r":
-        pass
-
-    else:
-        sys.exit(0)
-
-    print(NOCOLOUR)
-
-# Now get to work on the configs
-for config in configs:
-
-    # Get the destination location and expand it, then create it if it doesn't exist
-    destination = os.path.expandvars(config[0])
-
-    print("Working on directory {}".format(destination))
-
+def checkOrMakeDestination(destination):
     try:
         if not os.path.exists(destination):
             os.makedirs(destination)
-            # Chown if nessecary
-            if sudo_user:
-                os.chown(destination, sudo_user_uid, sudo_user_gid)
+            return True
     except OSError as e:
         if e.errno == 13:
             print(ERRORCOLOUR, end='')
-            print("  => ERROR: Permission denied to make directory {}".format(
-                destination))
+            print("  => ERROR: Permission denied to make directory {}".format(destination))
             print(NOCOLOUR, end='')
         else:
             print(e)
-        continue
+        return False
 
-    sources = []
+def normaliseSourceFiles(sources):
+    expanded_sources = []
 
-    for source in config[1]:
+    for source in sources:
 
-        rename = None
+        # If a rename is needed, we can skip normalising the sourcesappend the results to the end
+        if isinstance(source, tuple):
+            expanded_sources.append(source)
 
-        needsRename = isinstance(source, tuple)
+        # Else, check for globs
+        else:
+            expandedGlobs = glob.glob(source)
 
-        # If a rename is needed, expand the tupel
-        if needsRename:
-            (source, rename) = source
+            # for each found item in the glob, push a tuple with the "rename"
+            # argument the same as the current name to simplify moving later on
+            for expandedGlob in expandedGlobs:
 
-        # Expand any globs
-        expandedGlobs = glob.glob(source)
+                absPath = os.path.abspath(expandedGlob)
+                (_, name) = os.path.split(absPath)
 
-        # If we are to rename, but there was a glob that expanded to more than one item, ignore it as we can't rename
-        if len(expandedGlobs) > 1 and needsRename:
-            print(ERRORCOLOUR, end='')
-            print("  => Cannot use renames with GLOB that matches more than one file")
-            print("     Source {} matched with {}. Renaming to {} is not possible"
-                  .format(source, expandedGlobs, rename))
-            print(NOCOLOUR, end='')
-            continue
+                expanded_sources.append((absPath, name))
 
-        for expandedGlob in expandedGlobs:
-            # get the absolute path
-            absPath = os.path.abspath(expandedGlob)
-            (_, name) = os.path.split(absPath)
-            sources.append((absPath, rename or name))
+    return expanded_sources
 
-    # Allow tests to be performed on each file, if no test is provided, set a default one
-    def test(x): return True
-    if len(config) == 3:
-        test = config[2]
+def symblinkSources(destination, sources, test):
 
     try:
-
         for (source, rename) in sources:
 
-            testResult = test(source)
-            if testResult != True:
+            # First, run the test, and print the warning or reason if we're skipping
+            test_result = test(source)
+            if test_result != True:
                 print(WARNINGCOLOUR, end='')
                 print("  => Skipping Source file {} {}"
-                      .format(source, (" Reason: " + testResult if testResult else "")))
+                      .format(source, (" Reason: " + test_result if test_result else "")))
                 print(NOCOLOUR, end='')
                 continue
 
@@ -185,12 +124,16 @@ for config in configs:
 
             try:
                 if os.path.islink(fullDestinationPath):
-                    print(WARNINGCOLOUR, end='')
-                    print("  => Link {} exists, linking to {}, replacing"
-                          .format(fullDestinationPath, os.path.realpath(fullDestinationPath)))
-                    print(NOCOLOUR, end='')
-                    os.unlink(fullDestinationPath)
-                    os.symlink(source, fullDestinationPath)
+                    linkDestination = os.readlink(fullDestinationPath)
+                    if linkDestination == source:
+                        print("  => Link {} already exists".format(fullDestinationPath))
+                    else:
+                        print(WARNINGCOLOUR, end='')
+                        print("  => Link {} already exists, linking to {}. Re-linking to {}"
+                            .format(fullDestinationPath, linkDestination, source))
+                        print(NOCOLOUR, end='')
+                        os.unlink(fullDestinationPath)
+                        os.symlink(source, fullDestinationPath)
 
                 elif os.path.isfile(fullDestinationPath):
                     print(ERRORCOLOUR, end='')
@@ -200,8 +143,10 @@ for config in configs:
                     continue
 
                 else:
+                    print(SUCCESS_COLOUR, end='')
                     print("  => Symlinking {} to {}".format(
                         source, fullDestinationPath))
+                    print(NOCOLOUR, end='')
                     os.symlink(source, fullDestinationPath)
 
             except OSError as e:
@@ -221,6 +166,28 @@ for config in configs:
             print(NOCOLOUR, end='')
         else:
             print(e)
+
+# Now get to work on the configs
+for config in configs:
+
+    test = lambda x: True
+
+    if len(config) == 3:
+        (destination, sources, test) = config
+    else:
+        (destination, sources) = config
+
+    destination = os.path.expandvars(destination)
+
+    if checkOrMakeDestination(destination) == False:
+        continue
+
+    print("Working on directory {}".format(destination))
+
+    sources = normaliseSourceFiles(sources)
+
+    symblinkSources(destination, sources, test)
+
 
 print()
 print("Also Run:")
