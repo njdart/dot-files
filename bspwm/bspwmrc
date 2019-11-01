@@ -1,5 +1,7 @@
 #! /bin/bash
 
+compton --vsync &
+
 bspc config border_width        0
 bspc config window_gap          5
 bspc config click_to_focus      true
@@ -61,4 +63,3 @@ bspc rule -a Slack 'desktop=^0'
 
 polybar $HOSTNAME &
 
-compton --vsync --no-fading-openclose &

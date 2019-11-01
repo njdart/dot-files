@@ -39,7 +39,7 @@ export FZF_ALT_C_COMMAND="bfs -type d -nohidden"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS='--reverse --ansi --multi'
 export HISTORY_IGNORE="(ls*|cd*|pwd*|exit*|[ \t]*)"
-export PATH=$HOME/bin:/.gem/ruby/2.3.0/bin:$HOME/.local/bin:$HOME/.cabal/bin:$GOBIN:$PATH
+export PATH=$HOME/bin:~/.gem/ruby/2.3.0/bin:$HOME/.local/bin:$HOME/.cabal/bin:$GOBIN:$PATH
 export PASSWORD_STORE_GENERATED_LENGTH=32
 
 # key bindings
