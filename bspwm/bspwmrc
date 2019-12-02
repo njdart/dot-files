@@ -1,7 +1,5 @@
 #! /bin/bash
 
-compton --vsync &
-
 bspc config border_width        0
 bspc config window_gap          5
 bspc config click_to_focus      true
@@ -12,30 +10,22 @@ bspc config gapless_monocle     true
 HOSTNAME=`hostname`
 
 case $HOSTNAME in
+
+  # Desktop
   "KOCHANSKI")
-    xrandr --output DVI-I-1 --mode 1920x1080 --pos 0x0      --rotate left \
-           --output HDMI-0  --mode 1920x1080 --pos 1080x180 --rotate normal --primary \
-           --output DVI-D-0 --mode 1920x1080 --pos 3000x0   --rotate right
-
-    # Rename monitors
-    bspc monitor DVI-D-0 -n right
-    bspc monitor HDMI-0 -n center
-    bspc monitor DVI-I-1 -n left
-
-    bspc monitor left -d I II III
-    bspc monitor center -d IV V VI VII
-    bspc monitor right -d VIII IX X
-
-    bspc config -m left top_padding 5
-    bspc config -m left bottom_padding 5
+    bspc monitor -d I II III IV V VI VII VIII IX X
 
     feh --bg-tile --no-xinerama ~/.config/background
     ;;
+
+  # Laptop
   "QUEEG500")
     bspc monitor -d I II III IV V VI VII VIII IX X
 
     feh --bg-scale  --no-xinerama ~/.config/background
     ;;
+
+  # Work
   "ARCHY")
     xrandr --output VGA-1   --mode 1920x1080 --pos 0x0      --rotate left \
            --output DVI-I-1 --mode 1920x1080 --pos 1080x220 --rotate normal --primary

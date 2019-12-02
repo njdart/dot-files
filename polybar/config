@@ -38,7 +38,7 @@
   font-2 = unifont:fontformat=truetype:size=8:antialias=false
   font-3 = siji:pixelsize=10
   modules-left = bspwm
-  modules-center = mpd
+  modules-center = player-mpv-tail
   tray-position = right
   tray-detached = false
   tray-padding = 2
@@ -46,7 +46,6 @@
 
 [bar/KOCHANSKI]
   inherit = bar/base
-  monitor = ${env:MONITOR:HDMI-0}
   modules-center = player-mpv-tail
   modules-right = rootFs homeFs mediaFs volume vpn date
 
@@ -220,16 +219,14 @@
   format-prefix-foreground = ${colors.orange}
   format-close-foreground = ${colors.red}
 
-  click-left = "hamster &"
-
 [module/player-mpv-tail]
   type = custom/script
-  exec = ~/.config/polybar/player-mpv-tail.py -t 42 -c '#abb2bf'
+  exec = ~/.config/polybar/player-mpv-tail.py -t 42 -c 0a81f5
   tail = true
-  click-left = ~/polybar-scripts/player-mpv-tail.py -p pause
-  click-middle = ~/polybar-scripts/player-mpv-tail.py -p playlist-pos -1
-  click-right = ~/polybar-scripts/player-mpv-tail.py -p playlist-pos +1
-  scroll-up = ~/polybar-scripts/player-mpv-tail.py -p time-pos -10
-  scroll-down = ~/polybar-scripts/player-mpv-tail.py -p time-pos +10
+  click-left = ~/.config/polybar/player-mpv-tail.py -p pause
+  click-middle = ~/.config/polybar/player-mpv-tail.py -p playlist-pos -1
+  click-right = ~/.config/polybar/player-mpv-tail.py -p playlist-pos +1
+  scroll-up = ~/.config/polybar/player-mpv-tail.py -p time-pos +10
+  scroll-down = ~/.config/polybar/player-mpv-tail.py -p time-pos -10
 
 ; vim:ft=dosini
