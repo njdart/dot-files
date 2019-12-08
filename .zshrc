@@ -77,6 +77,7 @@ alias diff='diff --color=always'
 alias gitc='git log --color=always --format="%C(auto)%h %<(15,trunc)%an %s %C(black)%C(bold)%cr %C(auto)%d" | fzf | awk '"'"'{print $1}'"'"
 alias gitvc='git show `gitc` --color | less'
 alias gitt="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias mpw="mpv --x11-name docked"
 
 # Styling
 zstyle :compinstall filename "$HOME/.zshrc"
