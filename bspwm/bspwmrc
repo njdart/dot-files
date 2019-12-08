@@ -57,3 +57,5 @@ bspc rule -a 'Steam:*- Properties' state=float center=true
 polybar $HOSTNAME &
 
 compton --vsync --no-fading-openclose &
+
+sxhkd -s /tmp/sxhkd.fifo &
