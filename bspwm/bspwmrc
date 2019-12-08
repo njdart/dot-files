@@ -53,3 +53,4 @@ bspc rule -a Slack 'desktop=^0'
 
 polybar $HOSTNAME &
 
+compton --vsync --no-fading-openclose &
