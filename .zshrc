@@ -18,6 +18,7 @@ autoload -Uz vcs_info
 autoload -U colors
 setopt prompt_subst
 setopt HIST_IGNORE_SPACE
+setopt interactivecomments
 
 colors
 compinit
