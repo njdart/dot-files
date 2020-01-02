@@ -2,3 +2,5 @@
 *.swp
 *.wip.*
 *.wip
+junit.xml
+*.log

@@ -18,7 +18,7 @@ autoload -Uz vcs_info
 autoload -U colors
 setopt prompt_subst
 setopt HIST_IGNORE_SPACE
-setopt interactivecomments
+setopt INTERACTIVE_COMMENTS
 
 colors
 compinit
@@ -40,7 +40,9 @@ export FZF_ALT_C_COMMAND="bfs -type d -nohidden"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS='--reverse --ansi --multi'
 export HISTORY_IGNORE="(ls*|cd*|pwd*|exit*|[ \t]*)"
-export PATH=$HOME/bin:~/.gem/ruby/2.3.0/bin:$HOME/.local/bin:$HOME/.cabal/bin:$GOBIN:$PATH
+export ANDROID_HOME=/opt/Android/sdk
+export ANDROID_SDK_ROOT=/opt/Android/sdk
+export PATH=$ANDROID_HOME/build-tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$HOME/bin:~/.gem/ruby/2.6.0/bin:$HOME/.local/bin:$GOBIN:$PATH
 export PASSWORD_STORE_GENERATED_LENGTH=32
 
 # key bindings
@@ -65,7 +67,7 @@ bindkey "\e[F" end-of-line
 # completion in the middle of a line
 bindkey '^i' expand-or-complete-prefix
 
-alias ls='ls -sh1 --color'
+alias ls='ls -sh1v --color'
 alias hal='ls -hAlp --group-directories-first'
 alias grep='grep -n --color=always'
 alias egrep='grep -E --color=always'

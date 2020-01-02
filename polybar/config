@@ -56,7 +56,7 @@
 [bar/ARCHY]
   inherit = bar/base
   modules-center = hamster
-  monitor = ${env:MONITOR:DVI-I-1}
+  monitor = ${env:MONITOR:DP-3}
   modules-right = rootFs homeFs optFs volume vpn date
 
 [module/rootFs]
