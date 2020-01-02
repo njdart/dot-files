@@ -16,6 +16,9 @@ case $HOSTNAME in
     bspc monitor -d I II III IV V VI VII VIII IX X
 
     feh --bg-tile --no-xinerama ~/.config/background
+    bspc rule -a 'mpv:docked' state=floating sticky=true rectangle=960x540+1600+900
+    bspc rule -a 'Minecraft*:*' state=float center=true rectangle=1920x1080+320+180
+    bspc rule -a 'Steam:*- Properties' state=float center=true
     ;;
 
   # Laptop
@@ -50,9 +53,6 @@ bspc rule -a Google-chrome 'desktop=^3'
 bspc rule -a code-oss 'desktop=^4'
 bspc rule -a Virt-manager 'desktop=^9'
 bspc rule -a Slack 'desktop=^0'
-bspc rule -a 'mpv:docked' state=floating rectangle=480x360+2080+1080
-bspc rule -a 'Minecraft*:*' state=float center=true rectangle=1920x1080+320+180
-bspc rule -a 'Steam:*- Properties' state=float center=true
 
 polybar $HOSTNAME &
 
