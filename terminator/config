@@ -1,6 +1,17 @@
 [global_config]
   tab_position = hidden
+  title_use_system_font = False
+  title_font = Source Code Pro 9
 [keybindings]
+[profiles]
+  [[default]]
+    background_darkness = 0.9
+    background_type = transparent
+    cursor_color = "#aaaaaa"
+    show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_infinite = True
+    copy_on_selection = True
 [layouts]
   [[default]]
     [[[child1]]]
@@ -11,12 +22,3 @@
       parent = ""
       type = Window
 [plugins]
-[profiles]
-  [[default]]
-    background_darkness = 0.9
-    background_type = transparent
-    copy_on_selection = True
-    cursor_color = "#aaaaaa"
-    scrollback_infinite = True
-    scrollbar_position = hidden
-    show_titlebar = False
