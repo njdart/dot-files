@@ -104,4 +104,21 @@
         "yaml",
         "yml"
     ],
+    "terraform.indexing": {
+        "enabled": false,
+        "liveIndexing": false,
+        "delay": 500,
+        "exclude": [
+            ".terraform/**/*",
+            "**/.terraform/**/*"
+        ]
+    },
+    "terraform.languageServer": {
+        "external": true,
+        "args": [
+            "serve"
+        ]
+    },
+    "terraform.telemetry.enabled": false,
+    "editor.fontFamily": "'Source Code Pro Regular', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
 }
