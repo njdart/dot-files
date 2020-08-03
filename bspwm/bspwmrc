@@ -53,9 +53,13 @@ bspc rule -a Google-chrome 'desktop=^3'
 bspc rule -a code-oss 'desktop=^4'
 bspc rule -a Virt-manager 'desktop=^9'
 bspc rule -a Slack 'desktop=^0'
+bspc rule -a 'firefox:Toolkit' state=floating sticky=true
+bspc rule -a 'zoom' state=floating sticky=true rectangle=960x540+1600+900
 
 polybar $HOSTNAME &
 
 compton --vsync --no-fading-openclose &
 
 sxhkd -s /tmp/sxhkd.fifo &
+
+[ -f ~/.config/`hostname`.bspwmrc ] && source ~/.config/`hostname`.bspwmrc

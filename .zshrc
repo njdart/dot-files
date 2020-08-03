@@ -32,7 +32,7 @@ RPS1='${vcs_info_msg_0_}'
 export TERM=xterm
 export COLORTERM=terminator
 export EDITOR="/usr/bin/nvim"
-export BROWSER="/usr/bin/google-chrome-stable"
+export BROWSER="/usr/bin/firefox"
 export GOPATH="$HOME/go"
 export GOBIN="$HOME/go/bin"
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules,*.swp,dist,*.coffee}/*" 2> /dev/null'
@@ -80,7 +80,7 @@ alias diff='diff --color=always'
 alias gitc='git log --color=always --format="%C(auto)%h %<(15,trunc)%an %s %C(black)%C(bold)%cr %C(auto)%d" | fzf | awk '"'"'{print $1}'"'"
 alias gitvc='git show `gitc` --color | less'
 alias gitt="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias mpw="mpv --x11-name docked"
+alias mpw="mpv --x11-name=docked"
 
 # Styling
 zstyle :compinstall filename "$HOME/.zshrc"
@@ -105,6 +105,21 @@ function precmd {
 
 function du-sorted () {
     paste -d '#' <( du -s "$@" ) <( du -hs "$@" ) | sort -n -k1,7 | cut -d '#' -f 2
+}
+
+function markdown {
+    echo '<!DOCTYPE html>' > /tmp/markdown.html
+    echo '<html>' >> /tmp/markdown.html
+    echo '<head>' >> /tmp/markdown.html
+    echo '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css" integrity="sha256-gzohnzxILb7OZZch6c8mySnK1r0yFviwmBR+1E5O0RM=" crossorigin="anonymous" />' >> /tmp/markdown.html
+    echo "</head>" >> /tmp/markdown.html
+    echo "<body class=\"markdown-body\">" >> /tmp/markdown.html
+    marked $@ >> /tmp/markdown.html
+    echo "</body>" >> /tmp/markdown.html
+    echo "</html>" >> /tmp/markdown.html
+
+    $BROWSER /tmp/markdown.html
+
 }
 
 [ -f ~/.config/`hostname`.zshrc ] && source ~/.config/`hostname`.zshrc
