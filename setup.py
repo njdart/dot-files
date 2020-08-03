@@ -48,7 +48,9 @@ configs = [
         "./gitignore_global",
         "./rofi",
         "./dunst",
-        "./polybar"
+        "./polybar",
+        "./picom.conf",
+        "./systemd"
     ]),
 
     ("$HOME/.config/mpv", ["mpv.conf"]),
