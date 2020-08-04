@@ -91,7 +91,7 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:git*' formats "%{$fg[blue]%}%b%{$reset_color%}:%{$fg[red]%}(%m%u%c)%{$reset_color%}"
 
 function minikube {
-  if [ "$(kubectl config current-context)" == 'minikube' ]; then
+  if [ "$(kubectl config current-context)" = "minikube" ]; then
     /usr/bin/minikube $@
   else
     echo "Kubectl context is not minikube. Refusing to work"
