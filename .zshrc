@@ -73,7 +73,7 @@ alias grep='grep -n --color=always'
 alias egrep='grep -E --color=always'
 alias pingg="ping www.google.co.uk"
 alias lock='dm-tool lock'
-alias scrot='scrot ~/screenshots/%Y-%m-%d-%T-screenshot.png -e '"'"'echo $f'"'"
+alias scrot='scrot ~/screenshots/%Y-%m-%d-%T-screenshot.png -e '"'"'xclip -selection c -t image/png < $f && echo $f coppied to clipboard'"'"
 alias less="less -R"
 alias vim="nvim"
 alias diff='diff --color=always'
@@ -81,6 +81,7 @@ alias gitc='git log --color=always --format="%C(auto)%h %<(15,trunc)%an %s %C(bl
 alias gitvc='git show `gitc` --color | less'
 alias gitt="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias mpw="mpv --x11-name=docked"
+alias date="date --utc --iso-8601=s"
 
 # Styling
 zstyle :compinstall filename "$HOME/.zshrc"
