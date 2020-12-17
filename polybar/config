@@ -22,9 +22,9 @@
   margin-bottom = 0
 
 [bar/base]
-  width: 100%
-  height: 30
-  radius: 0
+  width = 100%
+  height = 25
+  radius = 0
   background = ${colors.grey}
   foreground = ${colors.lightGrey}
   line-size = 2
