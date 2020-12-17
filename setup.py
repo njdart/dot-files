@@ -57,6 +57,7 @@ configs = [
     ("$HOME/.config/sxhkd", ["./bspwm/sxhkdrc"]),
     ("$HOME/.config/bspwm", ["./bspwm/bspwmrc"]),
     ("$HOME/.config/Code", ["./vscode/User"]),
+    ("$HOME/.config/Code - OSS", ["./vscode/User"]),
 
     # Create the screenshot directory for the scrot alias in .zshrc
     ("$HOME/screenshots", []),

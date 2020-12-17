@@ -3,6 +3,9 @@
     "editor.renderWhitespace": "all",
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
+    "explorer.compactFolders": false,
+    "workbench.tree.indent": 32,
+    "workbench.tree.renderIndentGuides": "always",
     "editor.rulers": [
         80,
         120
@@ -70,7 +73,6 @@
     "diffEditor.renderSideBySide": true,
     "search.usePCRE2": true,
     "workbench.iconTheme": "material-icon-theme",
-    "gitlab.instanceUrl": "https://gitlab.uk.cambridgeconsultants.com",
     "cSpell.enabledLanguageIds": [
         "asciidoc",
         "c",
@@ -104,21 +106,21 @@
         "yaml",
         "yml"
     ],
-    "terraform.indexing": {
-        "enabled": false,
-        "liveIndexing": false,
-        "delay": 500,
-        "exclude": [
-            ".terraform/**/*",
-            "**/.terraform/**/*"
-        ]
-    },
     "terraform.languageServer": {
         "external": true,
         "args": [
             "serve"
         ]
     },
-    "terraform.telemetry.enabled": false,
     "editor.fontFamily": "'Source Code Pro Regular', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "python.showStartPage": false,
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "gitlens.views.repositories.location": "gitlens",
+    "gitlens.views.fileHistory.location": "gitlens",
+    "gitlens.views.lineHistory.location": "gitlens",
+    "gitlens.views.compare.location": "gitlens",
+    "gitlens.views.search.location": "gitlens",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
 }
