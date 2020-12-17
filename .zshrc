@@ -42,7 +42,7 @@ export FZF_DEFAULT_OPTS='--reverse --ansi --multi'
 export HISTORY_IGNORE="(ls*|hal*|cd*|pwd*|exit*|poweroff*|reboot*|[ \t]*)"
 export ANDROID_HOME=/opt/Android/sdk
 export ANDROID_SDK_ROOT=/opt/Android/sdk
-export PATH=$ANDROID_HOME/build-tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$HOME/bin:~/.gem/ruby/2.6.0/bin:$HOME/.local/bin:$GOBIN:$PATH
+export PATH=$HOME/bin:$ANDROID_HOME/build-tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$HOME/.gem/ruby/2.6.0/bin:$HOME/.local/bin:$GOBIN:$PATH
 export PASSWORD_STORE_GENERATED_LENGTH=32
 
 # key bindings
