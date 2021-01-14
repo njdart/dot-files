@@ -8,7 +8,8 @@
     "workbench.tree.renderIndentGuides": "always",
     "editor.rulers": [
         80,
-        120
+        120,
+        160
     ],
     "workbench.startupEditor": "newUntitledFile",
     "explorer.confirmDragAndDrop": false,
@@ -117,10 +118,7 @@
     "[vue]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "gitlens.views.repositories.location": "gitlens",
-    "gitlens.views.fileHistory.location": "gitlens",
-    "gitlens.views.lineHistory.location": "gitlens",
-    "gitlens.views.compare.location": "gitlens",
-    "gitlens.views.search.location": "gitlens",
     "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "files.enableTrash": false,
+    "git.suggestSmartCommit": false
 }
