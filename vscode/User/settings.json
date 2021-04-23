@@ -120,5 +120,7 @@
     },
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "files.enableTrash": false,
-    "git.suggestSmartCommit": false
+    "git.suggestSmartCommit": false,
+    "go.coverOnSingleTestFile": true,
+    "go.coverOnSingleTest": true
 }
