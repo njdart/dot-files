@@ -16,9 +16,21 @@ setopt appendhistory autocd extendedglob HIST_IGNORE_DUPS
 autoload -Uz compinit compdef
 autoload -Uz vcs_info
 autoload -U colors
-setopt prompt_subst
-setopt HIST_IGNORE_SPACE
-setopt INTERACTIVE_COMMENTS
+
+##
+## Options from https://zsh.sourceforge.io/Doc/Release/Options.html#Options
+##
+set -o autopushd # cd acts as pushd, popd to reverse
+set -o pushdignoredups # Ignore duplicates in history file
+set -o append_history # Append to history for each new terminal, allows multiple vttys
+set -o extended_history # Include timestamps and duration info # ‘: <beginning time>:<elapsed seconds>;<command>’
+set -o hist_ignore_space # Ignore commands prefixed with space
+set -o interactive_comments
+set -o prompt_subst
+## Prevent pipe from overwriting existing files, eg
+# touch foo && echo "bar" > ./foo # zsh: file exists: ./foo
+## Use echo "bar" >| ./foo to allow overwrite
+set -o noclobber
 
 colors
 compinit
