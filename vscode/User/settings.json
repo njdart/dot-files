@@ -13,7 +13,6 @@
     ],
     "workbench.startupEditor": "newUntitledFile",
     "explorer.confirmDragAndDrop": false,
-    "window.zoomLevel": 0,
     "extensions.ignoreRecommendations": false,
     "files.autoSave": "onFocusChange",
     "files.trimTrailingWhitespace": true,
@@ -28,7 +27,8 @@
     "files.associations": {
         "*.gyp": "json",
         "*.cnf": "ini",
-        "Vagrantfile": "ruby"
+        "Vagrantfile": "ruby",
+        "*.pkr.hcl": "terraform"
     },
     "git.autofetch": true,
     "telemetry.enableTelemetry": false,
@@ -122,5 +122,9 @@
     "files.enableTrash": false,
     "git.suggestSmartCommit": false,
     "go.coverOnSingleTestFile": true,
-    "go.coverOnSingleTest": true
+    "go.coverOnSingleTest": true,
+    "redhat.telemetry.enabled": false,
+    "vs-kubernetes": {
+        "vscode-kubernetes.minikube-path.linux": "/home/nic/.vs-kubernetes/tools/minikube/linux-amd64/minikube"
+    }
 }
