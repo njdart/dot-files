@@ -1,5 +1,7 @@
 #! /bin/bash
 
+set -x
+
 bspc config border_width        0
 bspc config window_gap          5
 bspc config click_to_focus      true
@@ -58,7 +60,7 @@ bspc rule -a 'zoom' state=floating sticky=true rectangle=960x540+1600+900
 
 polybar $HOSTNAME &
 
-compton --vsync --no-fading-openclose &
+picom -b
 
 sxhkd -s /tmp/sxhkd.fifo &
 
