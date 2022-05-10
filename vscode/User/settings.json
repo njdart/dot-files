@@ -126,5 +126,7 @@
     "redhat.telemetry.enabled": false,
     "vs-kubernetes": {
         "vscode-kubernetes.minikube-path.linux": "/home/nic/.vs-kubernetes/tools/minikube/linux-amd64/minikube"
-    }
+    },
+    "go.formatTool": "goimports",
+    "go.useLanguageServer": true
 }
