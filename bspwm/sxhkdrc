@@ -72,6 +72,10 @@ super + ctrl + shift + space
 super + ctrl + space
   bspc node -p cancel
 
+# rotate nodes on the desktop
+super + {r, shift + R}
+  bspc node @/ -R {90, -90}
+
 ###################
 
 # Launch Terminal
