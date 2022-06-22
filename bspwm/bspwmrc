@@ -56,7 +56,7 @@ bspc rule --add code-oss 'desktop=^4'
 bspc rule --add Virt-manager 'desktop=^9'
 bspc rule --add Slack 'desktop=^0'
 bspc rule --add 'firefox:Toolkit' state=floating sticky=true
-bspc rule --add 'zoom' state=floating sticky=true rectangle=960x540+1600+900
+bspc rule --add 'join?action=join&confno=' state=floating sticky=true rectangle=960x540+1600+900
 bspc rule --add 'Thunderbird:*' desktop='X'
 
 polybar $HOSTNAME &
