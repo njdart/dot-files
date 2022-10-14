@@ -46,6 +46,11 @@ case $HOSTNAME in
 
     feh --bg-tile --no-xinerama ~/.config/background
     ;;
+  "CHIPPER")
+    bspc monitor -d I II III IV V VI VII VIII IX X
+
+    feh --bg-scale --no-xinerama ~/.config/background
+    ;;
   "*")
     ;;
 esac
