@@ -57,6 +57,7 @@ esac
 
 bspc rule --add firefox 'desktop=^2'
 bspc rule --add Google-chrome 'desktop=^3'
+bspc rule --add Chromium 'desktop=^3'
 bspc rule --add code-oss 'desktop=^4'
 bspc rule --add Virt-manager 'desktop=^9'
 bspc rule --add Slack 'desktop=^0'
