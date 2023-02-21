@@ -6,11 +6,7 @@
     "explorer.compactFolders": false,
     "workbench.tree.indent": 32,
     "workbench.tree.renderIndentGuides": "always",
-    "editor.rulers": [
-        80,
-        120,
-        160
-    ],
+    "editor.rulers": [80, 120, 160],
     "workbench.startupEditor": "newUntitledFile",
     "explorer.confirmDragAndDrop": false,
     "extensions.ignoreRecommendations": false,
@@ -31,8 +27,6 @@
         "*.pkr.hcl": "terraform"
     },
     "git.autofetch": true,
-    "telemetry.enableTelemetry": false,
-    "telemetry.enableCrashReporter": false,
     "prettier.tabWidth": 4,
     "eslint.nodePath": "/home/nic/.nvm/versions/node/12.13.1/lib/node_modules",
     "eslint.run": "onType",
@@ -54,26 +48,17 @@
         "suppressUpdateNotice": false,
         "suppressWelcomeNotice": true
     },
-    "go.testFlags": [
-        "-v"
-    ],
+    "go.testFlags": ["-v"],
     "gitlens.advanced.telemetry.enabled": false,
     "[go]": {
         "editor.insertSpaces": false,
         "editor.formatOnSave": false
     },
-    "prettier.disableLanguages": [
-        "vue",
-        "json"
-    ],
     "gitlens.keymap": "chorded",
     "gitlens.historyExplorer.enabled": true,
     "cSpell.language": "en-GB",
     "breadcrumbs.enabled": true,
-    "diffEditor.ignoreTrimWhitespace": false,
-    "diffEditor.renderSideBySide": true,
     "search.usePCRE2": true,
-    "workbench.iconTheme": "material-icon-theme",
     "cSpell.enabledLanguageIds": [
         "asciidoc",
         "c",
@@ -107,14 +92,7 @@
         "yaml",
         "yml"
     ],
-    "terraform.languageServer": {
-        "external": true,
-        "args": [
-            "serve"
-        ]
-    },
     "editor.fontFamily": "'Source Code Pro Regular', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-    "python.showStartPage": false,
     "[vue]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
@@ -128,5 +106,15 @@
         "vscode-kubernetes.minikube-path.linux": "/home/nic/.vs-kubernetes/tools/minikube/linux-amd64/minikube"
     },
     "go.formatTool": "goimports",
-    "go.useLanguageServer": true
+    "go.useLanguageServer": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    },
+    "workbench.iconTheme": "material-icon-theme",
+    "terraform.languageServer.enable": true,
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "telemetry.telemetryLevel": "off",
+    "python.experiments.enabled": false
 }

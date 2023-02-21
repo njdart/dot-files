@@ -53,12 +53,6 @@
   inherit = bar/base
   modules-right = rootFs homeFs volume wlan-wlp2s0 vpn battery temperature date
 
-[bar/ARCHY]
-  inherit = bar/base
-  modules-center = player-mpv-tail
-  monitor = ${env:MONITOR:DP-3}
-  modules-right = rootFs homeFs optFs volume vpn date
-
 [bar/CHIPPER]
   inherit = bar/base
   modules-right = rootFs homeFs volume wlan-wlan0 battery temperature date
@@ -151,13 +145,13 @@
   type = internal/date
   interval = 5
 
-  date =
   time = %H:%M
+  date = %d %b
 
-  format-prefix = %{F#0a81f5}%{F-}
+  format = %{F#0a81f5}%{F-} <label>
   format-prefix-foreground = ${colors.lightGrey}
 
-  label = %date% %time%
+  label = "%date% %time%"
 
 [module/volume]
   type = internal/pulseaudio
@@ -212,8 +206,8 @@
   format-warn = <ramp> <label-warn>
   format-warn-underline = ${colors.red}
 
-  label = %temperature%
-  label-warn = %temperature%
+  label = %temperature-c%
+  label-warn = %temperature-c%
   label-warn-foreground = ${colors.red}
 
   ramp-0 = 
