@@ -38,7 +38,11 @@ compinit
 stty -ixon
 
 # Set Prompt
-PS1="[%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m%{$reset_color%}] %{$fg_no_bold[yellow]%}%~%{$reset_color%}%\\$ "
+if [ -f /.dockerenv ]; then
+  PS1="[%{$fg[red]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}] %{$fg_no_bold[yellow]%}%~%{$reset_color%}%\\$ "
+else
+  PS1="[%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m%{$reset_color%}] %{$fg_no_bold[yellow]%}%~%{$reset_color%}%\\$ "
+fi
 RPS1='${vcs_info_msg_0_}'
 
 export TERM=xterm
@@ -83,7 +87,7 @@ alias ls='ls -sh1v --color'
 alias hal='ls -hAlp --group-directories-first'
 alias grep='grep -n --color=always'
 alias egrep='grep -E --color=always'
-alias pingg="ping www.google.co.uk"
+alias pingg="ping www.google.com.au"
 alias lock='dm-tool lock'
 alias scrot='scrot ~/screenshots/%Y-%m-%d-%T-screenshot.png -e '"'"'xclip -selection c -t image/png < $f && echo $f coppied to clipboard'"'"
 alias less="less -R"
