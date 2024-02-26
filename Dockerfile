@@ -27,7 +27,7 @@ tar -xvf yay.tar.gz && cd yay/
 makepkg --syncdeps --noconfirm
 sudo pacman -U --noconfirm yay-*.pkg.tar.zst
 
-yay -Syu --noconfirm fzf git go inetutils neovim htop jq python ripgrep tmux wget which xdg-user-dirs zip zsh-syntax-highlighting
+yay -Syu --noconfirm fzf git go inetutils neovim helm htop jq kubectl python ripgrep tmux wget which xdg-user-dirs zip zsh-syntax-highlighting
 
 cd ~
 rm -rf $TMP

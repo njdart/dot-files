@@ -31,7 +31,7 @@ compinit
 stty -ixon
 
 # Set Prompt
-if [ -f /.dockerenv ]; then
+if [ -f /.dockerenv || -f /run/secrets/kubernetes.io/serviceaccount/token ]; then
   PS1="[%{$fg[red]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}] %{$fg_no_bold[yellow]%}%~%{$reset_color%}%\\$ "
 else
   PS1="[%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m%{$reset_color%}] %{$fg_no_bold[yellow]%}%~%{$reset_color%}%\\$ "
