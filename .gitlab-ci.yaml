@@ -7,6 +7,7 @@ variables:
 docker_build:
     stage: build
     image: docker:${DOCKER_VERSION}
+    interruptible: true
     services:
         - docker:${DOCKER_VERSION}-dind
     script:
