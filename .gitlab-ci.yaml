@@ -13,8 +13,8 @@ docker_build:
         - export MONTH_TAG=$(\date +"%b" |  tr '[:upper:]' '[:lower:]')-$(\date +"%Y")
         - echo ${CI_REGISTRY_PASSWORD} | docker login -u ${CI_REGISTRY_USER} --password-stdin ${CI_REGISTRY}
         - docker build . -t ${CI_REGISTRY_IMAGE}/latest -t ${CI_REGISTRY_IMAGE}/${MONTH_TAG} -t ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA} -f Dockerfile
-        - docker push ${CI_REGISTRY_IMAGE}/latest
-        - docker push ${CI_REGISTRY_IMAGE}/${MONTH_TAG}
+        - docker push ${CI_REGISTRY_IMAGE}:latest
+        - docker push ${CI_REGISTRY_IMAGE}:${MONTH_TAG}
         - docker push ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}
     rules:
         - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
