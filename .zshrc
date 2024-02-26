@@ -92,7 +92,7 @@ alias gitvc='git show `gitc` --color | less'
 alias gitt="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias mpw="mpv --x11-name=docked"
 alias date="date --utc --iso-8601=s"
-alias kubectl-debug='kubectl run $(whoami)-debug --rm=true --restart=Never --image=$KUBECTL_DEBUG_IMAGE --stdin=true --tty=true'
+alias kubectl-debug='kubectl run $(whoami)-debug --rm=true --restart=Never --image=$KUBECTL_DEBUG_IMAGE --stdin=true --tty=true --pod-running-timeout=10m0s'
 
 # Styling
 zstyle :compinstall filename "$HOME/.zshrc"
