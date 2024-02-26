@@ -47,7 +47,7 @@
 [bar/KOCHANSKI]
   inherit = bar/base
   modules-center = player-mpv-tail
-  modules-right = rootFs homeFs mediaFs volume vpn date
+  modules-right = rootFs homeFs fastMediaFs slowMediaFs volume vpn date
 
 [bar/QUEEG500]
   inherit = bar/base
@@ -80,6 +80,22 @@
   mount-0 = /media
 
   label-mounted = %{F#0a81f5}%{F-} %percentage_used%%
+
+[module/fastMediaFs]
+  type = internal/fs
+  interval = 25
+
+  mount-0 = /media-fast
+
+  label-mounted = %{F#0a81f5}%{F-} %percentage_used%%
+
+[module/slowMediaFs]
+  type = internal/fs
+  interval = 25
+
+  mount-0 = /media-slow
+
+  label-mounted = %{F#f49049}%{F-} %percentage_used%%
 
 [module/optFs]
   type = internal/fs

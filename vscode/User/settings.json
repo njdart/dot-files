@@ -34,7 +34,8 @@
     "todohighlight.keywordsPattern": "(TODO|FIXME|HACK|FIX ME):?",
     "C_Cpp.intelliSenseEngine": "Default",
     "markdown.styles": [
-        "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.9.0/github-markdown.css"
+        "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.9.0/github-markdown.css",
+        "https://cdn.jsdelivr.net/gh/dhdhagar/vscode-md-preview-light/style.min.css"
     ],
     "gitlens.advanced.messages": {
         "suppressCommitHasNoPreviousCommitWarning": false,
@@ -52,7 +53,8 @@
     "gitlens.advanced.telemetry.enabled": false,
     "[go]": {
         "editor.insertSpaces": false,
-        "editor.formatOnSave": false
+        "editor.formatOnSave": false,
+        "editor.defaultFormatter": "ms-vscode.Go"
     },
     "gitlens.keymap": "chorded",
     "gitlens.historyExplorer.enabled": true,
@@ -116,5 +118,12 @@
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
     "telemetry.telemetryLevel": "off",
-    "python.experiments.enabled": false
+    "python.experiments.enabled": false,
+    "[terraform]": {
+        "editor.defaultFormatter": "hashicorp.terraform"
+    },
+    "[terraform-vars]": {
+        "editor.defaultFormatter": "hashicorp.terraform"
+    },
+    "workbench.iconTheme": "material-icon-theme"
 }

@@ -1,10 +1,13 @@
 #! /bin/bash
 
-set -x
+exec &> /tmp/bspwm.log
+set -eux -o pipefail
+
+# Start sxhkd first so we have an escape hatch if things go wrong
+sxhkd -s /tmp/sxhkd.fifo &
 
 bspc config border_width        0
 bspc config window_gap          5
-bspc config click_to_focus      true
 bspc config split_ratio         0.52
 bspc config borderless_monocle  true
 bspc config gapless_monocle     true
@@ -17,7 +20,7 @@ case $HOSTNAME in
   "KOCHANSKI")
     bspc monitor -d I II III IV V VI VII VIII IX X
 
-    feh --bg-tile --no-xinerama ~/.config/background
+    feh --bg-fill --no-xinerama ~/.config/background
     bspc rule -a 'mpv:docked' state=floating sticky=true rectangle=960x540+1600+900
     bspc rule -a 'Minecraft*:*' state=float center=true rectangle=1920x1080+320+180
     bspc rule -a 'Steam:*- Properties' state=float center=true
@@ -68,7 +71,5 @@ bspc rule --add 'Thunderbird:*' desktop='X'
 polybar $HOSTNAME &
 
 picom -b
-
-sxhkd -s /tmp/sxhkd.fifo &
 
 [ -f ~/.config/`hostname`.bspwmrc ] && source ~/.config/`hostname`.bspwmrc
