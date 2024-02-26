@@ -35,3 +35,15 @@ To get a list of extensions, prefixed with the install command, run;
 ```
 code --list-extensions | xargs -L 1 echo code --install-extension
 ```
+
+## Dockerfile
+
+```
+docker run --rm -it registry.gitlab.com/njdart/dot-files:latest
+```
+
+Or use a monthly image tag, eg `feb-2024`, or a (short) commit sha, eg `fef2dc5`
+
+## Kubectl
+
+See the `kubectl-debug` alias in [.zshrc](.zshrc)
