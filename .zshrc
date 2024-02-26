@@ -6,13 +6,6 @@ SAVEHIST=1000
 
 setopt appendhistory autocd extendedglob HIST_IGNORE_DUPS
 
-# Source external dependencies
-[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-[ -f /usr/share/doc/pkgfile/command-not-found.zsh ] && source /usr/share/doc/pkgfile/command-not-found.zsh
-[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
-[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
-[ -f /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
-
 autoload -Uz compinit compdef
 autoload -Uz vcs_info
 autoload -U colors
@@ -107,36 +100,15 @@ zstyle ':vcs_info:*' stagedstr '*'
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:git*' formats "%{$fg[blue]%}%b%{$reset_color%}:%{$fg[red]%}(%m%u%c)%{$reset_color%}"
 
-function minikube {
-  if [ "$(kubectl config current-context)" = "minikube" ]; then
-    /usr/bin/minikube $@
-  else
-    echo "Kubectl context is not minikube. Refusing to work"
-    return 1
-  fi
-}
-
 function precmd {
   vcs_info
 }
 
-function du-sorted () {
-    paste -d '#' <( du -s "$@" ) <( du -hs "$@" ) | sort -n -k1,7 | cut -d '#' -f 2
-}
-
-function markdown {
-    echo '<!DOCTYPE html>' > /tmp/markdown.html
-    echo '<html>' >> /tmp/markdown.html
-    echo '<head>' >> /tmp/markdown.html
-    echo '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css" integrity="sha256-gzohnzxILb7OZZch6c8mySnK1r0yFviwmBR+1E5O0RM=" crossorigin="anonymous" />' >> /tmp/markdown.html
-    echo "</head>" >> /tmp/markdown.html
-    echo "<body class=\"markdown-body\">" >> /tmp/markdown.html
-    marked $@ >> /tmp/markdown.html
-    echo "</body>" >> /tmp/markdown.html
-    echo "</html>" >> /tmp/markdown.html
-
-    $BROWSER /tmp/markdown.html
-}
-
+# Source external dependencies
+[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -f /usr/share/doc/pkgfile/command-not-found.zsh ] && source /usr/share/doc/pkgfile/command-not-found.zsh
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+[ -f /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
 [ -f ~/.config/`hostname`.zshrc ] && source ~/.config/`hostname`.zshrc
 
