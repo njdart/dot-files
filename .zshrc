@@ -53,6 +53,7 @@ export ANDROID_HOME=/opt/Android/sdk
 export ANDROID_SDK_ROOT=/opt/Android/sdk
 export PATH=$HOME/bin:$ANDROID_HOME/build-tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$HOME/.gem/ruby/2.6.0/bin:$HOME/.local/bin:$GOBIN:$PATH
 export PASSWORD_STORE_GENERATED_LENGTH=32
+export KUBECTL_DEBUG_IMAGE=registry.gitlab.com/njdart/dot-files:latest
 
 # key bindings
 #bindkey -e
@@ -91,6 +92,7 @@ alias gitvc='git show `gitc` --color | less'
 alias gitt="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias mpw="mpv --x11-name=docked"
 alias date="date --utc --iso-8601=s"
+alias kubectl-debug='kubectl run $(whoami)-debug --rm=true --restart=Never --image=$KUBECTL_DEBUG_IMAGE --stdin=true --tty=true'
 
 # Styling
 zstyle :compinstall filename "$HOME/.zshrc"
