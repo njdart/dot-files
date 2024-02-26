@@ -33,7 +33,7 @@ cd ~
 rm -rf $TMP
 
 xdg-user-dirs-update
-mkdir -p ~/git/github/njdart && cd ~/git/github/njdart && git clone https://github.com/njdart/dot-files && cd ~/git/github/njdart/dot-files && ./setup.py
+mkdir -p ~/git/gitlab/njdart && cd ~/git/gitlab/njdart && git clone https://gitlab.com/njdart/dot-files && cd ~/git/gitlab/njdart/dot-files && ./setup.py
 cd ~
 git config --global core.excludesfile ~/.config/gitignore_global
 
