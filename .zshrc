@@ -136,7 +136,6 @@ function markdown {
     echo "</html>" >> /tmp/markdown.html
 
     $BROWSER /tmp/markdown.html
-
 }
 
 [ -f ~/.config/`hostname`.zshrc ] && source ~/.config/`hostname`.zshrc

@@ -3,198 +3,125 @@
 #
 # from http://github.com/njdart/dot-files
 
-import os
 import os.path
-import glob
-import socket
 import sys
-import pwd
-import grp
+from typing import Callable, Optional
+from pathlib import Path
 
 ERRORCOLOUR = "\033[91m"
 WARNINGCOLOUR = '\033[93m'
 SUCCESS_COLOUR = '\033[32m'
 NOCOLOUR = "\033[0m"
 
-# a list of tuples as such:
-#   (
-#       "Destination directory as string",
-#       [
-#           "file1",
-#           "file2",
-#           "*file_with_glob_*"
-#           ("file3", "destinationName")
-#       ],
-#       lambda file: False  # Optional test to perform. Returning anything other than true will prevent linking.
-#                           # Anything other than false will be given as a reason for skipping
-#   )
-configs = [
-    # # These resources will require root privileges to link
-    # ("/etc/X11/xorg.conf.d", [
-    #     "./xorg/*"
-    # ]),
+class ConfigItem():
+    src: Path
+    dest: Path
 
-    # User config
-    ("$HOME", [
-        "./bin",
-        "./.xprofile",
-        "./.zshrc",
-        "./.tmux.conf"
-    ]),
+    def __init__(self, src: str, dest: str):
+        self.src = Path(os.path.expandvars(src)).absolute()
+        self.dest = Path(os.path.expandvars(dest)).absolute()
 
-    ("$HOME/.config", [
-        "./nvim",
-        "./terminator",
-        "./gitignore_global",
-        "./rofi",
-        "./dunst",
-        "./polybar",
-        "./picom.conf",
-        "./systemd"
-    ]),
+    def describe(self) -> str:
+        return f"""{self.__class__.__name__}("{self.src}" -> "{self.dest}")"""
 
-    ("$HOME/.config/mpv", ["mpv.conf"]),
-    ("$HOME/.config/sxhkd", ["./bspwm/sxhkdrc"]),
-    ("$HOME/.config/bspwm", ["./bspwm/bspwmrc"]),
-    ("$HOME/.config/Code", ["./vscode/User"]),
-    ("$HOME/.config/Code - OSS", ["./vscode/User"]),
+    def check_src(self) -> bool:
+        return self.src.exists()
 
-    # Create the screenshot directory for the scrot alias in .zshrc
-    ("$HOME/screenshots", []),
-]
+    def ensure_destination(self):
+        """ ensure_destination ensures the destination directory exists,
+            creating it if it doesn't. """
+        dest_dir = self.dest.parent
+        if not dest_dir.exists():
+            dest_dir.mkdir(parents=True)
 
-def checkOrMakeDestination(destination):
-    try:
-        if not os.path.exists(destination):
-            os.makedirs(destination)
-            return True
-    except OSError as e:
-        if e.errno == 13:
-            print(ERRORCOLOUR, end='')
-            print("  => ERROR: Permission denied to make directory {}".format(destination))
-            print(NOCOLOUR, end='')
-        else:
-            print(e)
-        return False
+        if not dest_dir.is_dir():
+            raise Exception(f"{dest_dir} exists but is not a directory!")
 
-def normaliseSourceFiles(sources):
-    expanded_sources = []
+    def symlink_src_to_dest(self) -> Optional[str]:
+        """ symlink_src_to_dest will attempt to symlink the destination
+            file to the """
 
-    for source in sources:
+        existing_src = None
+        if self.dest.is_symlink():
+            existing_src = self.dest.readlink()
+            if existing_src == self.src:
+                return None
+            self.dest.unlink()
+        self.dest.symlink_to(self.src, target_is_directory=self.src.is_dir())
+        return existing_src
 
-        # If a rename is needed, we can skip normalising the sourcesappend the results to the end
-        if isinstance(source, tuple):
-            expanded_sources.append(source)
+    def setup(self):
+        if not self.check_src():
+            raise Exception(f"Source {self.src} does not exist")
 
-        # Else, check for globs
-        else:
-            expandedGlobs = glob.glob(source)
+        try:
+            self.ensure_destination()
+        except OSError as e:
+            raise Exception(f"Error creating destination: {str(e)}")
 
-            # for each found item in the glob, push a tuple with the "rename"
-            # argument the same as the current name to simplify moving later on
-            for expandedGlob in expandedGlobs:
+        try:
+            existed = self.symlink_src_to_dest()
+            if existed is not None:
+                raise Exception(f"Link {self.dest} already exists, linking to {existed}. Re-linking to {self.src}")
+        except Exception as e:
+            raise Exception(f"Error creating symlink: {str(e)}")
 
-                absPath = os.path.abspath(expandedGlob)
-                (_, name) = os.path.split(absPath)
+class EmptyDir(ConfigItem):
+    def __init__(self, dest: str):
+        super().__init__("", dest)
 
-                expanded_sources.append((absPath, name))
+    def describe(self) -> str:
+        return f"""EmptyDir("{self.dest}")"""
 
-    return expanded_sources
+    def symlink_src_to_dest(self) -> Optional[str]:
+        """ This doesn't need to do anything, since calling
+            ConfigItem.ensure_Destination() will do all the work
+        """
+        pass
 
-def symblinkSources(destination, sources, test):
+def warn(s: str) -> str:
+    return f"{WARNINGCOLOUR}{s}{NOCOLOUR}"
 
-    try:
-        for (source, rename) in sources:
+def error(s: str) -> str:
+    return f"{ERRORCOLOUR}{s}{NOCOLOUR}"
 
-            # First, run the test, and print the warning or reason if we're skipping
-            test_result = test(source)
-            if test_result != True:
-                print(WARNINGCOLOUR, end='')
-                print("  => Skipping Source file {} {}"
-                      .format(source, (" Reason: " + test_result if test_result else "")))
-                print(NOCOLOUR, end='')
-                continue
+def setup(configs: list[ConfigItem]):
+    errors = False
+    for config in configs:
+        print(config.describe())
+        try:
+            config.setup()
+        except Exception as e:
+            print(warn(str(e)))
+            errors = True
+    return errors
 
-            # Check the source file exists
-            if not os.path.exists(source):
-                print(ERRORCOLOUR, end='')
-                print("  => ERROR, source file {} does not exist".format(source))
-                print(NOCOLOUR, end='')
-                continue
+def globFiles(srcs: str, dest: str) -> list[ConfigItem]:
+    srcs_path = Path(srcs)
+    dest_path = Path(dest)
+    return [ConfigItem(str(s), str(dest_path/s.name)) for s in srcs_path.parent.glob(srcs_path.name)]
 
-            # Get the proposed destination. Any directores provided in the source file location are omitted
-            fullDestinationPath = os.path.join(destination, rename)
+if __name__ == "__main__":
+    errors = setup([
+        *globFiles("bin/*", "$HOME/bin"),
+        ConfigItem(".zshrc", "$HOME/.zshrc"),
+        ConfigItem(".tmux.conf", "$HOME/.tmux.conf"),
+        ConfigItem("nvim", "$HOME/.config/nvim"),
+        ConfigItem("terminator", "$HOME/.config/terminator"),
+        ConfigItem("gitignore_global", "$HOME/.config/gitignore_global"),
+        ConfigItem("rofi", "$HOME/.config/rofi"),
+        ConfigItem("dunst", "$HOME/.config/dunst"),
+        ConfigItem("polybar", "$HOME/.config/polybar"),
+        ConfigItem("picom.conf", "$HOME/.config/picom.conf"),
+        ConfigItem("systemd", "$HOME/.config/systemd"),
+        ConfigItem("./bspwm/sxhkdrc", "$HOME/.config/sxhkd/sxhkdrc"),
+        ConfigItem("./bspwm/bspwmrc", "$HOME/.config/bspwm/bspwmrc"),
+        ConfigItem("./vscode/User", "$HOME/.config/Code/User"),
+        ConfigItem("./vscode/User", "$HOME/.config/Code - OSS/User"),
 
-            try:
-                if os.path.islink(fullDestinationPath):
-                    linkDestination = os.readlink(fullDestinationPath)
-                    if linkDestination == source:
-                        print("  => Link {} already exists".format(fullDestinationPath))
-                    else:
-                        print(WARNINGCOLOUR, end='')
-                        print("  => Link {} already exists, linking to {}. Re-linking to {}"
-                            .format(fullDestinationPath, linkDestination, source))
-                        print(NOCOLOUR, end='')
-                        os.unlink(fullDestinationPath)
-                        os.symlink(source, fullDestinationPath)
+        # Create the screenshot directory for the scrot alias in .zshrc
+        EmptyDir("$HOME/screenshots"),
+    ])
 
-                elif os.path.isfile(fullDestinationPath):
-                    print(ERRORCOLOUR, end='')
-                    print("  => File {} exists, ignoring".format(
-                        fullDestinationPath))
-                    print(NOCOLOUR, end='')
-                    continue
-
-                else:
-                    print(SUCCESS_COLOUR, end='')
-                    print("  => Symlinking {} to {}".format(
-                        source, fullDestinationPath))
-                    print(NOCOLOUR, end='')
-                    os.symlink(source, fullDestinationPath)
-
-            except OSError as e:
-                if e.errno == 13:
-                    print(ERRORCOLOUR, end='')
-                    print(ERRORCOLOUR + "    => ERROR: Permission denied to symlink {} to {}"
-                          .format(source, fullDestinationPath))
-                    print(NOCOLOUR, end='')
-                else:
-                    print(e)
-
-    except OSError as e:
-        if e.errno == 13:
-            print(ERRORCOLOUR, end='')
-            print("  => ERROR: Permission denied to make directory {}".format(
-                destination))
-            print(NOCOLOUR, end='')
-        else:
-            print(e)
-
-# Now get to work on the configs
-for config in configs:
-
-    test = lambda x: True
-
-    if len(config) == 3:
-        (destination, sources, test) = config
-    else:
-        (destination, sources) = config
-
-    destination = os.path.expandvars(destination)
-
-    if checkOrMakeDestination(destination) == False:
-        continue
-
-    print("Working on directory {}".format(destination))
-
-    sources = normaliseSourceFiles(sources)
-
-    symblinkSources(destination, sources, test)
-
-
-print()
-print("Also Run:")
-print()
-print(" # git config --global core.excludesfile ~/.config/gitignore_global")
-print()
-print(" # bash ./vscode/extensions")
+    if errors:
+        sys.exit(1)
